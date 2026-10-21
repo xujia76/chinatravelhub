@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xujia76.github.io/chinatravelhub/sitemap.xml

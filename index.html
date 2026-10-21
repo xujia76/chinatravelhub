@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChinaTravelHub — China Travel Guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23B4432F'/%3E%3Cpath d='M32 14l4.2 9.2L46 24.5l-7.2 6.6 2 10.4L32 36.4l-8.8 5.1 2-10.4L18 24.5l9.8-1.3z' fill='%23F5F1E8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --vermilion:#B4432F;
+    --vermilion-dark:#8F3526;
+    --ink:#23201C;
+    --ink-soft:#4A443C;
+    --rice:#F5F1E8;
+    --rice-deep:#EDE6D8;
+    --celadon:#4E6E5E;
+    --ochre:#C89B3C;
+    --line:rgba(35,32,28,.14);
+    --shadow:0 18px 40px rgba(35,32,28,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  button{font-family:inherit;border:none;background:none;color:inherit;cursor:pointer;text-align:left}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--vermilion);outline-offset:2px}
+  body{
+    font-family:"Source Sans 3",-apple-system,"Segoe UI",system-ui,sans-serif;
+    background:var(--rice);
+    color:var(--ink);
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.15}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* ===== 导航 ===== */
+  header.site-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(245,241,232,.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:20px;letter-spacing:.2px}
+  .brand-mark{width:26px;height:26px;flex:0 0 auto}
+  .nav-links{display:flex;gap:4px;align-items:center}
+  .nav-link{
+    padding:7px 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--ink-soft);
+    cursor:pointer;transition:background .18s,color .18s;
+  }
+  .nav-link:hover{background:var(--rice-deep);color:var(--ink)}
+  .nav-link.active{background:var(--vermilion);color:#fff}
+  .nav-cta{
+    margin-left:6px;padding:8px 16px;border-radius:999px;background:var(--ink);color:#fff;
+    font-size:14px;font-weight:600;cursor:pointer;transition:background .18s;
+  }
+  .nav-cta:hover{background:var(--vermilion-dark)}
+  .menu-btn{display:none;width:42px;height:42px;border:none;background:transparent;cursor:pointer;border-radius:8px}
+  .menu-btn:hover{background:var(--rice-deep)}
+  .menu-btn svg{width:22px;height:22px;stroke:var(--ink)}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;min-height:86vh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}
+  .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,32,28,.28) 0%,rgba(35,32,28,.1) 45%,rgba(35,32,28,.78) 100%)}
+  .hero-content{position:relative;z-index:2;padding-top:56px;padding-bottom:64px;color:#fff;max-width:820px}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:2.4px;
+    text-transform:uppercase;color:#F0D9A8;margin-bottom:16px;
+  }
+  .hero-eyebrow::before{content:"";width:26px;height:1.5px;background:var(--ochre)}
+  .hero h1{font-size:clamp(40px,7.2vw,78px);font-weight:600;letter-spacing:-.5px;margin-bottom:18px}
+  .hero-sub{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,.9);max-width:600px;margin-bottom:30px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:999px;
+    font-size:15px;font-weight:600;cursor:pointer;border:none;transition:transform .15s,background .18s;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-solid{background:var(--vermilion);color:#fff}
+  .btn-solid:hover{background:var(--vermilion-dark)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(4px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.24)}
+  .btn svg{width:16px;height:16px}
+
+  /* ===== 统计条 ===== */
+  .stats{background:var(--ink);color:#fff}
+  .stats-inner{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding-top:26px;padding-bottom:26px}
+  .stat b{font-family:"Cormorant Garamond",Georgia,serif;font-size:34px;font-weight:600;color:#F0D9A8;display:block}
+  .stat span{font-size:13px;color:rgba(255,255,255,.75);letter-spacing:.4px}
+  @media(min-width:768px){.stats-inner{grid-template-columns:repeat(4,1fr);padding-top:34px;padding-bottom:34px}}
+
+  /* ===== 区块通用 ===== */
+  .section{padding:72px 0}
+  .section-head{margin-bottom:38px;max-width:680px}
+  .section-kicker{
+    font-size:13px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;
+    color:var(--vermilion);margin-bottom:10px;
+  }
+  .section-head h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-.3px}
+  .section-head p{margin-top:12px;color:var(--ink-soft);font-size:17px}
+
+  /* ===== 目的地网格 ===== */
+  .dest-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(min-width:768px){.dest-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
+  @media(min-width:1080px){.dest-grid{grid-template-columns:repeat(4,1fr)}}
+  .dest-card{
+    position:relative;border-radius:16px;overflow:hidden;cursor:pointer;
+    aspect-ratio:3/4;background:var(--rice-deep);box-shadow:0 2px 10px rgba(35,32,28,.08);
+    transition:transform .25s,box-shadow .25s;
+  }
+  .dest-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .dest-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .dest-card:hover img{transform:scale(1.05)}
+  .dest-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,32,28,0) 42%,rgba(35,32,28,.82) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff}
+  .dest-tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px;margin-bottom:auto;color:#F5E9D2}
+  .dest-overlay h3{font-size:25px;margin-bottom:4px}
+  .dest-overlay p{font-size:13.5px;color:rgba(255,255,255,.82)}
+
+  /* ===== 为什么来中国 ===== */
+  .why{background:var(--rice-deep)}
+  .why-grid{display:grid;grid-template-columns:1fr;gap:18px}
+  @media(min-width:768px){.why-grid{grid-template-columns:repeat(3,1fr)}}
+  .why-item{border-left:3px solid var(--vermilion);padding:6px 0 6px 18px;background:transparent}
+  .why-item h3{font-size:22px;margin-bottom:6px}
+  .why-item p{font-size:15px;color:var(--ink-soft)}
+
+  /* ===== 路线预览 ===== */
+  .route-strip{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:768px){.route-strip{grid-template-columns:repeat(3,1fr)}}
+  .route-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+  .route-card .days{font-size:13px;font-weight:700;color:var(--celadon);letter-spacing:1px;text-transform:uppercase}
+  .route-card h3{font-size:23px;margin:8px 0 10px}
+  .route-card p{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px}
+  .route-more{font-size:14px;font-weight:600;color:var(--vermilion);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .route-more:hover{text-decoration:underline}
+
+  /* ===== CTA 带 ===== */
+  .cta-band{background:var(--vermilion);color:#fff;text-align:center;padding:64px 20px}
+  .cta-band h2{font-size:clamp(28px,4.2vw,42px);margin-bottom:12px}
+  .cta-band p{font-size:17px;color:rgba(255,255,255,.85);max-width:560px;margin:0 auto 26px}
+  .btn-light{background:#fff;color:var(--vermilion)}
+  .btn-light:hover{background:var(--rice-deep)}
+
+  footer.site-footer{background:var(--ink);color:rgba(255,255,255,.7);padding:44px 0 36px}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+  .footer-brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;color:#fff;font-weight:600}
+  .footer-brand p{font-family:"Source Sans 3",sans-serif;font-size:13.5px;color:rgba(255,255,255,.55);margin-top:8px;max-width:340px}
+  .footer-col h4{font-size:13px;letter-spacing:1.6px;text-transform:uppercase;color:#F0D9A8;margin-bottom:12px}
+  .footer-col a,.footer-col button{display:block;font-size:14px;padding:4px 0;cursor:pointer;color:rgba(255,255,255,.7)}
+  .footer-col a:hover,.footer-col button:hover{color:#fff}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;padding-top:18px;font-size:12.5px;color:rgba(255,255,255,.45);display:flex;flex-direction:column;gap:6px}
+  @media(min-width:768px){.footer-bottom{flex-direction:row;justify-content:space-between}}
+
+  /* ===== 视图切换 ===== */
+  .view{display:none}
+  .view.active{display:block;animation:fadeIn .3s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ===== 移动端菜单 ===== */
+  @media(max-width:760px){
+    .menu-btn{display:inline-flex;align-items:center;justify-content:center}
+    .nav-links{
+      position:absolute;top:62px;left:0;right:0;background:var(--rice);
+      flex-direction:column;align-items:stretch;padding:10px 16px 16px;
+      border-bottom:1px solid var(--line);display:none;
+    }
+    .nav-links.open{display:flex}
+    .nav-link{padding:13px 14px;border-radius:10px;font-size:16px}
+    .nav-cta{margin:6px 0 0;justify-content:center;display:flex}
+  }
+
+  /* ===== 详情视图 ===== */
+  .detail-hero{position:relative;height:44vh;min-height:300px;display:flex;align-items:flex-end;overflow:hidden}
+  .detail-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .detail-hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,32,28,.1),rgba(35,32,28,.72))}
+  .detail-hero .inner{position:relative;z-index:2;color:#fff;padding:0 0 34px;width:100%}
+  .back-link{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:#F0D9A8;cursor:pointer;margin-bottom:14px;padding:8px 0}
+  .back-link:hover{color:#fff}
+  .detail-hero h1{font-size:clamp(34px,6vw,56px)}
+  .detail-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .chip{font-size:12.5px;font-weight:600;background:rgba(255,255,255,.16);padding:5px 12px;border-radius:999px;backdrop-filter:blur(4px)}
+  .detail-body{max-width:820px;margin:0 auto;padding:52px 20px 72px}
+  .detail-body h2{font-size:28px;margin:36px 0 14px;display:flex;align-items:baseline;gap:10px}
+  .detail-body h2 .no{font-size:15px;color:var(--vermilion);font-family:"Source Sans 3",sans-serif;font-weight:700}
+  .detail-body p{font-size:16.5px;color:var(--ink-soft);margin-bottom:12px}
+  .detail-list{margin:8px 0 16px;padding-left:2px}
+  .detail-list li{list-style:none;position:relative;padding:7px 0 7px 26px;font-size:15.5px;color:var(--ink)}
+  .detail-list li::before{content:"";position:absolute;left:2px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--vermilion)}
+  .tip-box{background:var(--rice-deep);border-left:3px solid var(--celadon);border-radius:0 10px 10px 0;padding:16px 18px;margin:18px 0;font-size:15px;color:var(--ink-soft)}
+  .tip-box b{color:var(--celadon)}
+
+  /* ===== 攻略视图 ===== */
+  .guide-grid{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:768px){.guide-grid{grid-template-columns:repeat(2,1fr)}}
+  .guide-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;transition:box-shadow .2s,transform .2s}
+  .guide-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .guide-card .ico{width:38px;height:38px;border-radius:10px;background:var(--rice-deep);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .guide-card .ico svg{width:20px;height:20px;stroke:var(--vermilion)}
+  .card-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--celadon);margin-bottom:4px}
+  .guide-card h3{font-size:21px;margin-bottom:6px}
+  .guide-card p{font-size:14.5px;color:var(--ink-soft)}
+  .guide-detail{max-width:820px;margin:0 auto;padding:44px 20px 72px}
+  .guide-detail h2{font-size:32px;margin-bottom:6px}
+  .guide-detail .lead{color:var(--ink-soft);font-size:17px;margin-bottom:22px}
+  .guide-detail h3{font-size:22px;margin:28px 0 10px;color:var(--ink)}
+  .guide-detail li{font-size:15.5px;padding:5px 0 5px 22px;position:relative;list-style:none;color:var(--ink-soft)}
+  .guide-detail li::before{content:"";position:absolute;left:2px;top:14px;width:7px;height:7px;border-radius:50%;background:var(--celadon)}
+
+  /* ===== 路线视图 ===== */
+  .itin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+  .itin-tab{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:all .18s}
+  .itin-tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .itin-timeline{position:relative;max-width:760px}
+  .itin-timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .itin-day{position:relative;padding:0 0 26px 44px}
+  .itin-day::before{content:"";position:absolute;left:4px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--vermilion);border:3px solid var(--rice)}
+  .itin-day b{display:block;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--vermilion);font-family:"Source Sans 3",sans-serif}
+  .itin-day h3{font-size:21px;margin:4px 0 6px}
+  .itin-day p{font-size:15px;color:var(--ink-soft)}
+  .itin-day .stay{margin-top:6px;font-size:13px;color:var(--celadon);font-weight:600}
+
+  /* ===== 联系视图 ===== */
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:34px}
+  @media(min-width:900px){.contact-grid{grid-template-columns:5fr 4fr}}
+  .form-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
+  .form-card label{display:block;font-size:13.5px;font-weight:700;margin:18px 0 6px;letter-spacing:.3px}
+  .form-card input,.form-card select,.form-card textarea{
+    width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;
+    font-size:16px;font-family:inherit;background:var(--rice);color:var(--ink);
+  }
+  .form-card input:focus,.form-card select:focus,.form-card textarea:focus{outline:2px solid var(--vermilion);outline-offset:-1px;border-color:transparent}
+  .form-card textarea{min-height:120px;resize:vertical}
+  .form-card .btn{margin-top:20px;width:100%;justify-content:center}
+  .contact-side h3{font-size:24px;margin:0 0 10px}
+  .contact-side p{font-size:15.5px;color:var(--ink-soft);margin-bottom:22px}
+  .contact-email{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .contact-email svg{width:20px;height:20px;stroke:var(--vermilion);flex:0 0 auto}
+  .contact-email b{display:block;font-size:15px}
+  .contact-email span{font-size:13.5px;color:var(--ink-soft)}
+  .faq-item{border-bottom:1px solid var(--line);padding:16px 0}
+  .faq-item summary{font-size:15.5px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .faq-item summary::after{content:"+";font-size:20px;color:var(--vermilion);font-weight:400}
+  .faq-item[open] summary::after{content:"–"}
+  .faq-item p{font-size:14.5px;color:var(--ink-soft);margin-top:10px}
+
+  #toast{
+    position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:13px 24px;border-radius:999px;font-size:14.5px;font-weight:600;
+    opacity:0;pointer-events:none;transition:all .28s;z-index:99;box-shadow:var(--shadow);
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="12" fill="#B4432F"/><path d="M32 14l4.2 9.2L46 24.5l-7.2 6.6 2 10.4L32 36.4l-8.8 5.1 2-10.4L18 24.5l9.8-1.3z" fill="#F5F1E8"/></svg>
+      ChinaTravelHub
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <button type="button" class="nav-link active" data-view="home">Home</button>
+      <button type="button" class="nav-link" data-view="destinations">Destinations</button>
+      <button type="button" class="nav-link" data-view="guides">Travel Guides</button>
+      <button type="button" class="nav-link" data-view="itineraries">Itineraries</button>
+      <button type="button" class="nav-link" data-view="food">Food</button>
+      <button type="button" class="nav-link" data-view="culture">Culture</button>
+      <button type="button" class="nav-link" data-view="martial">Martial Arts</button>
+      <button type="button" class="nav-link" data-view="contact">Contact</button>
+      <button type="button" class="nav-cta" data-view="itineraries">Plan My Trip</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ===== 视图：home ===== -->
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <img class="hero-img" src="assets/hero_greatwall.jpg" alt="The Great Wall winding through green mountains at sunrise">
+      <div class="hero-veil"></div>
+      <div class="wrap hero-content">
+        <span class="hero-eyebrow">Independent travel guide</span>
+        <h1>China, for the curious traveler</h1>
+        <p class="hero-sub">Honest, practical guidance for first-time and repeat visitors — from the Great Wall to quiet alleys, from bullet trains to street food. Built by travelers, updated constantly.</p>
+        <div class="hero-actions">
+          <button class="btn btn-solid" data-view="destinations">Explore Destinations
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <button class="btn btn-ghost" data-view="guides">Start with the Basics</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="wrap stats-inner">
+        <div class="stat"><b>7</b><span>Featured destinations</span></div>
+        <div class="stat"><b>40+</b><span>Practical travel guides</span></div>
+        <div class="stat"><b>4</b><span>Languages served</span></div>
+        <div class="stat"><b>24/7</b><span>Independent editorial</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">Destinations</span>
+          <h2>Where should you go first?</h2>
+          <p>Seven proven starting points, each with its own rhythm — imperial cities, karst rivers, sky-high cliffs, old towns, and living traditions.</p>
+        </div>
+        <div class="dest-grid" id="destGrid">
+          <article class="dest-card" data-slug="beijing"><img src="assets/bj_greatwall.jpg" alt="Beijing — Imperial capital"><div class="dest-overlay"><span class="dest-tag">Imperial capital</span><h3>Beijing</h3><p>Great Wall, Forbidden City, hutong alleys — and the best roast duck in the world.</p></div></article>
+          <article class="dest-card" data-slug="xian"><img src="assets/xa_terracotta.jpg" alt="Xi'an — Ancient capital"><div class="dest-overlay"><span class="dest-tag">Ancient capital</span><h3>Xi'an</h3><p>The Terracotta Army, a city wall you can cycle, and a food street that never sleeps.</p></div></article>
+          <article class="dest-card" data-slug="guilin"><img src="assets/gl_liriver.jpg" alt="Guilin & Yangshuo — Karst landscape"><div class="dest-overlay"><span class="dest-tag">Karst landscape</span><h3>Guilin &amp; Yangshuo</h3><p>Limestone peaks, Li River cruises, and bamboo rafts on quiet mornings.</p></div></article>
+          <article class="dest-card" data-slug="zhangjiajie"><img src="assets/zjj_zhangjiajie.jpg" alt="Zhangjiajie — Sandstone pillars"><div class="dest-overlay"><span class="dest-tag">Sandstone pillars</span><h3>Zhangjiajie</h3><p>The mountains that inspired Avatar — mist-wrapped sandstone columns and glass walkways.</p></div></article>
+          <article class="dest-card" data-slug="chengdu"><img src="assets/cd_panda.jpg" alt="Chengdu — Panda city"><div class="dest-overlay"><span class="dest-tag">Panda city</span><h3>Chengdu</h3><p>Pandas, teahouses, hotpot, and the slowest, happiest pace in China.</p></div></article>
+          <article class="dest-card" data-slug="lijiang"><img src="assets/lj_lijiang.jpg" alt="Lijiang — Old town"><div class="dest-overlay"><span class="dest-tag">Old town</span><h3>Lijiang</h3><p>A Naxi old town with canals, snow mountains, and night bars under the stars.</p></div></article>
+          <article class="dest-card" data-slug="hangzhou"><img src="assets/hz_westlake.jpg" alt="Hangzhou — Lake & tea"><div class="dest-overlay"><span class="dest-tag">Lake &amp; tea</span><h3>Hangzhou</h3><p>West Lake at dusk, Longjing tea fields, and the calm poets wrote about for a thousand years.</p></div></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="section why">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">Why China</span>
+          <h2>What most guides get wrong</h2>
+          <p>China is not hard to travel — it is simply different. Once you understand the basics, it becomes one of the most rewarding countries on earth.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-item">
+            <h3>It is easier than you fear</h3>
+            <p>English signage is everywhere in major cities, high-speed rail is world-class, and mobile payment is a one-time setup — not a daily struggle.</p>
+          </div>
+          <div class="why-item">
+            <h3>The depth is unmatched</h3>
+            <p>Five thousand years of continuous civilization means layers of history under every street: dynasties, temples, dialects, and cuisines that change every 200 kilometers.</p>
+          </div>
+          <div class="why-item">
+            <h3>It rewards slow travelers</h3>
+            <p>The famous sights are famous for a reason. But the real China shows itself in teahouses, night markets, park dancers, and conversations you never planned.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">Sample Itineraries</span>
+          <h2>Two classic routes, fully planned</h2>
+          <p>Day-by-day itineraries with transport, stays, and honest notes on pacing — no filler stops.</p>
+        </div>
+        <div class="route-strip">
+          <div class="route-card">
+            <span class="days">7 days</span>
+            <h3>The Classic Loop</h3>
+            <p>Beijing → Xi'an → Shanghai. Imperial walls, the Terracotta Army, and a modern skyline — the perfect first trip.</p>
+            <button type="button" class="route-more" data-view="itineraries">View itinerary →</button>
+          </div>
+          <div class="route-card">
+            <span class="days">12 days</span>
+            <h3>Mountains &amp; Rivers</h3>
+            <p>Zhangjiajie → Guilin → Yangshuo. Sandstone pillars, karst peaks, and bamboo-raft mornings.</p>
+            <button type="button" class="route-more" data-view="itineraries">View itinerary →</button>
+          </div>
+          <div class="route-card">
+            <span class="days">15 days</span>
+            <h3>Slow South</h3>
+            <p>Shanghai → Hangzhou → Chengdu → Lijiang. Gardens, pandas, tea, and old-town nights.</p>
+            <button type="button" class="route-more" data-view="itineraries">View itinerary →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">Food, Culture &amp; Martial Arts</span>
+          <h2>Eat like a local, live like a local</h2>
+          <p>Regional dishes worth crossing the country for — plus the customs and martial arts that turn a visit into belonging.</p>
+        </div>
+        <div class="route-strip">
+          <div class="route-card">
+            <span class="days">12 regional icons</span>
+            <h3>Chinese Food</h3>
+            <p>Peking duck, hand-pulled noodles, hotpot, mooncake — where they come from and exactly how to eat them.</p>
+            <button type="button" class="route-more" data-view="food">Explore the dishes →</button>
+          </div>
+          <div class="route-card">
+            <span class="days">8 living customs</span>
+            <h3>Culture &amp; Customs</h3>
+            <p>Festivals, tea ritual, temple etiquette, red packets, and the morning parks where daily China happens.</p>
+            <button type="button" class="route-more" data-view="culture">Understand the customs →</button>
+          </div>
+          <div class="route-card">
+            <span class="days">8 martial arts</span>
+            <h3>Martial Arts</h3>
+            <p>Tai chi, Shaolin kung fu, qigong, and the internal arts — where to see them, and where to learn.</p>
+            <button type="button" class="route-more" data-view="martial">Walk the path →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-band">
+      <h2>Ready to build your own route?</h2>
+      <p>Tell us your dates, your pace, and what you love — we will sketch a realistic day-by-day plan, free of tourist-trap padding.</p>
+      <button class="btn btn-light" data-view="contact">Ask for a Custom Plan</button>
+    </div>
+  </section>
+
+  <!-- ===== 视图：目的地列表 ===== -->
+  <section class="view" id="view-destinations">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">Destinations</span>
+          <h2>Seven starting points</h2>
+          <p>Each card opens a full guide: when to go, what to see, how to get around, and the mistake most visitors make.</p>
+        </div>
+        <div class="dest-grid" id="destGridFull">
+          <article class="dest-card" data-slug="beijing"><img src="assets/bj_greatwall.jpg" alt="Beijing — Imperial capital"><div class="dest-overlay"><span class="dest-tag">Imperial capital</span><h3>Beijing</h3><p>Great Wall, Forbidden City, hutong alleys — and the best roast duck in the world.</p></div></article>
+          <article class="dest-card" data-slug="xian"><img src="assets/xa_terracotta.jpg" alt="Xi'an — Ancient capital"><div class="dest-overlay"><span class="dest-tag">Ancient capital</span><h3>Xi'an</h3><p>The Terracotta Army, a city wall you can cycle, and a food street that never sleeps.</p></div></article>
+          <article class="dest-card" data-slug="guilin"><img src="assets/gl_liriver.jpg" alt="Guilin & Yangshuo — Karst landscape"><div class="dest-overlay"><span class="dest-tag">Karst landscape</span><h3>Guilin &amp; Yangshuo</h3><p>Limestone peaks, Li River cruises, and bamboo rafts on quiet mornings.</p></div></article>
+          <article class="dest-card" data-slug="zhangjiajie"><img src="assets/zjj_zhangjiajie.jpg" alt="Zhangjiajie — Sandstone pillars"><div class="dest-overlay"><span class="dest-tag">Sandstone pillars</span><h3>Zhangjiajie</h3><p>The mountains that inspired Avatar — mist-wrapped sandstone columns and glass walkways.</p></div></article>
+          <article class="dest-card" data-slug="chengdu"><img src="assets/cd_panda.jpg" alt="Chengdu — Panda city"><div class="dest-overlay"><span class="dest-tag">Panda city</span><h3>Chengdu</h3><p>Pandas, teahouses, hotpot, and the slowest, happiest pace in China.</p></div></article>
+          <article class="dest-card" data-slug="lijiang"><img src="assets/lj_lijiang.jpg" alt="Lijiang — Old town"><div class="dest-overlay"><span class="dest-tag">Old town</span><h3>Lijiang</h3><p>A Naxi old town with canals, snow mountains, and night bars under the stars.</p></div></article>
+          <article class="dest-card" data-slug="hangzhou"><img src="assets/hz_westlake.jpg" alt="Hangzhou — Lake & tea"><div class="dest-overlay"><span class="dest-tag">Lake &amp; tea</span><h3>Hangzhou</h3><p>West Lake at dusk, Longjing tea fields, and the calm poets wrote about for a thousand years.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：目的地详情（JS更新值，静态模板） ===== -->
+  <section class="view" id="view-detail">
+    <div class="detail-hero">
+      <img id="detailImg" src="assets/bj_greatwall.jpg" alt="Beijing">
+      <div class="veil"></div>
+      <div class="wrap inner">
+        <button type="button" class="back-link" data-view="destinations">← All destinations</button>
+        <h1 id="detailTitle">Beijing</h1>
+        <div class="detail-meta">
+          <span class="chip" id="detailTag">Imperial capital</span>
+          <span class="chip" id="detailBest">Best: Spring and autumn</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail-body" id="detailBody"></div>
+  </section>
+
+  <!-- ===== 视图：攻略列表（JS渲染） ===== -->
+  <section class="view" id="view-guides"></section>
+  <section class="view" id="view-guide-detail"></section>
+
+  <!-- ===== 视图：美食（JS渲染） ===== -->
+  <section class="view" id="view-food"></section>
+  <section class="view" id="view-food-detail"></section>
+
+  <!-- ===== 视图：风俗（JS渲染） ===== -->
+  <section class="view" id="view-culture"></section>
+  <section class="view" id="view-culture-detail"></section>
+
+  <!-- ===== 视图：武术（JS渲染） ===== -->
+  <section class="view" id="view-martial"></section>
+  <section class="view" id="view-martial-detail"></section>
+
+  <!-- ===== 视图：路线（JS渲染） ===== -->
+  <section class="view" id="view-itineraries"></section>
+
+  <!-- ===== 视图：联系 ===== -->
+  <section class="view" id="view-contact">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">Contact</span>
+          <h2>Talk to a human (or two)</h2>
+          <p>Questions about an itinerary, a correction to a guide, or a collaboration — we read everything and reply within 48 hours.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="form-card">
+            <form id="contactForm">
+              <label for="cName">Your name</label>
+              <input id="cName" name="name" type="text" required placeholder="e.g. Alex Martin">
+              <label for="cEmail">Email</label>
+              <input id="cEmail" name="email" type="email" required placeholder="you@example.com">
+              <label for="cTopic">What is this about?</label>
+              <select id="cTopic" name="topic">
+                <option>Custom itinerary request</option>
+                <option>Correction or update to a guide</option>
+                <option>Partnership / press</option>
+                <option>Just saying hello</option>
+              </select>
+              <label for="cMsg">Message</label>
+              <textarea id="cMsg" name="message" required placeholder="Dates, destinations, pace, budget — the more context the better."></textarea>
+              <button class="btn btn-solid" type="submit">Send Message
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+              </button>
+            </form>
+          </div>
+          <div class="contact-side">
+            <h3>Direct line</h3>
+            <p>Prefer email? Write to us directly — we check it daily.</p>
+            <div class="contact-email">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 7L2 7"/></svg>
+              <div><b>hello@overcomeself.com</b><span>Responses within 48 hours</span></div>
+            </div>
+            <h3 style="margin-top:26px">Common questions</h3>
+            <div class="faq-item"><details><summary>Do you sell tours?</summary><p>No. We are an independent editorial guide. We recommend routes and honest options, but we never sell packages or take commissions from operators.</p></details></div>
+            <div class="faq-item"><details><summary>Can you plan a custom trip?</summary><p>Yes — use the form with your dates and style, and we will send a realistic day-by-day sketch with transport and stay suggestions.</p></details></div>
+            <div class="faq-item"><details><summary>Are the guides up to date?</summary><p>We review practical sections (visas, payments, transport) every season. When rules change, we update and note the revision date.</p></details></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">ChinaTravelHub</div>
+        <p>An independent English-language guide to traveling China — destinations, practical basics, and honest itineraries, written for curious visitors.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <button type="button" data-view="destinations">Destinations</button>
+        <button type="button" data-view="guides">Travel Guides</button>
+        <button type="button" data-view="itineraries">Itineraries</button>
+        <button type="button" data-view="food">Chinese Food</button>
+        <button type="button" data-view="culture">Culture &amp; Customs</button>
+        <button type="button" data-view="martial">Martial Arts</button>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <button type="button" data-view="contact">Contact Us</button>
+        <button type="button" data-view="contact">hello@overcomeself.com</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ChinaTravelHub. Independent editorial guide. All content original.</span>
+      <span>Made with care in China · English · 中文 · 日本語 · 한국어</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===== 数据：目的地 ===== */
+  var DESTINATIONS = [
+    {
+      slug:"beijing", name:"Beijing", tag:"Imperial capital",
+      img:"assets/bj_greatwall.jpg",
+      brief:"Great Wall, Forbidden City, hutong alleys — and the best roast duck in the world.",
+      intro:"Beijing is where most first trips begin — and for good reason. The imperial scale of the Forbidden City, the fortress silence of Mutianyu's wall, and the small-town warmth of a hutong courtyard all sit within one city.",
+      best:"Spring (April–May) and autumn (September–October) offer clear skies and comfortable weather. Summer is hot but lively; winter is cold, crisp, and dramatically quiet at the Great Wall.",
+      sights:["The Great Wall at Mutianyu (less crowded, cable car available)","Forbidden City (book tickets days ahead — timed entry)","Temple of Heaven at sunrise, where locals practice tai chi","A hutong walking tour around Shichahai","Summer Palace for a lakeside afternoon"],
+      how:"Arrive at Beijing Capital or Daxing airport; the subway is clean, cheap, and English-labeled. For the Great Wall, take the 916 express bus to Huairou or join a small-group day tour from your hotel.",
+      tip:"Book the Forbidden City online at least 3 days ahead — walk-up tickets are almost never available. And order roast duck at 11:00 to skip the lunch queue.",
+      accent:"closest"}
+    ,{ slug:"xian", name:"Xi'an", tag:"Ancient capital",
+      img:"assets/xa_terracotta.jpg",
+      brief:"The Terracotta Army, a city wall you can cycle, and a food street that never sleeps.",
+      intro:"Xi'an is the eastern terminus of the Silk Road and the capital of 13 dynasties. The Terracotta Army is only the headline — the old city wall, the Muslim Quarter, and the quiet museums deserve equal time.",
+      best:"March–May and September–November. Summer is hot; winter is dry and cold but emptier.",
+      sights:["Terracotta Army (go early, spend 3+ hours)","Cycle the 14 km Ming City Wall at sunset","Muslim Quarter food street: roujiamo, liangpi, yangrou paomo","Shaanxi History Museum (free timed entry, book in advance)","Big Wild Goose Pagoda at night"],
+      how:"High-speed rail links Xi'an to Beijing (4.5h), Shanghai (6h) and Chengdu (3h). The airport express + metro reach the center in under an hour.",
+      tip:"At the Terracotta Army, hire a licensed guide at the entrance — the story is 10 times richer with context. Skip the cheap 'army replica' shops outside.",
+      accent:"closest"}
+    ,{ slug:"guilin", name:"Guilin & Yangshuo", tag:"Karst landscape",
+      img:"assets/gl_liriver.jpg",
+      brief:"Limestone peaks, Li River cruises, and bamboo rafts on quiet mornings.",
+      intro:"The karst mountains of Guilin and Yangshuo look like a Chinese ink painting because Chinese painting learned from here. Boats glide between peaks, rice paddies hold villages, and the light changes every hour.",
+      best:"April–June for green rice terraces; September–October for clear skies. Rain is common — a misty river is not a disappointment, it is the postcard.",
+      sights:["Li River cruise from Guilin to Yangshuo (the classic 4-hour ride)","Yulong River bamboo-raft drift near Yangshuo","Cycle the countryside east of Yangshuo","Xingping town for the 20-yuan-bill view","Longji Rice Terraces (2h north) at sunrise"],
+      how:"Fly into Guilin Liangjiang airport, take the high-speed train from major cities (Guangzhou 2.5h), then a 1h bus or river ferry to Yangshuo.",
+      tip:"Skip the packaged 'tourist attractions' in the city center — the best Guilin is on a bicycle east of Yangshuo, where the paths are empty by 9am.",
+      accent:"closest"}
+    ,{ slug:"zhangjiajie", name:"Zhangjiajie", tag:"Sandstone pillars",
+      img:"assets/zjj_zhangjiajie.jpg",
+      brief:"The mountains that inspired Avatar — mist-wrapped sandstone columns and glass walkways.",
+      intro:"Hundreds of sandstone pillars rise out of subtropical forest, often above a sea of clouds. The park is huge, vertical, and best taken slowly — cable cars, cliff walkways, and one well-chosen sunrise.",
+      best:"April–May and September–October for clear air. Avoid Chinese public holidays — the park queues are legendary.",
+      sights:["Yuanjiajie 'Avatar' pillars (early morning, before tour groups)","Tianzi Mountain cable car at sunrise","Glass bridge at Zhangjiajie Grand Canyon (nerves required)","Golden Whip Stream — a gentle 7km valley walk","Tianmen Mountain's 'Heaven's Gate' arch"],
+      how:"Fly or take the high-speed train to Zhangjiajie West station, then a 40-minute bus to the Wulingyuan park entrance.",
+      tip:"Stay one night inside or right at the park entrance and enter before 7am — the difference between a crowd and a wilderness is one hour.",
+      accent:"closest"}
+    ,{ slug:"chengdu", name:"Chengdu", tag:"Panda city",
+      img:"assets/cd_panda.jpg",
+      brief:"Pandas, teahouses, hotpot, and the slowest, happiest pace in China.",
+      intro:"Chengdu is famous for pandas, but locals will tell you it is famous for a way of life: afternoon teahouses, endless hotpot, mahjong in the park, and no one in a hurry.",
+      best:"March–June and September–November. Pandas are most active in the morning — arrive at opening time.",
+      sights:["Chengdu Research Base of Giant Panda Breeding (go at 8:00)","People's Park teahouse for a bamboo-seat afternoon","Hotpot on a street corner (start mild — it escalates)","Wenshu Monastery and its vegetarian restaurant","A Sichuan opera face-changing show"],
+      how:"Chengdu Tianfu airport is 1h from the city; the metro reaches the panda base with one transfer. High-speed rail: Chongqing 1h, Xi'an 3h, Beijing 8h.",
+      tip:"Pandas nap by midday — be at the base's enclosures by 8:30 and you will see them eating bamboo, not sleeping. Hotpot order: 'guo di la' (half-spicy) if unsure.",
+      accent:"closest"}
+    ,{ slug:"lijiang", name:"Lijiang", tag:"Old town",
+      img:"assets/lj_lijiang.jpg",
+      brief:"A Naxi old town with canals, snow mountains, and night bars under the stars.",
+      intro:"Lijiang's UNESCO-listed old town is a web of canals, cobblestones, and Naxi wooden houses, with the Jade Dragon Snow Mountain towering behind it. Bustling by day, lantern-lit by night.",
+      best:"March–May (spring flowers) and October–November (clear mountain views). Rainy season runs June–September.",
+      sights:["Wander the old town canals before 9am, when it is quiet","Jade Dragon Snow Mountain cable car (book in advance)","Baisha village for Naxi murals and a slower pace","Shuhe old town — smaller sister, half the crowd","A Naxi orchestra performance in the evening"],
+      how:"Fly to Lijiang Sanyi airport (30 min to town) or take the high-speed rail from Kunming (3h) through Dali.",
+      tip:"The old town's core is a maze that repeats itself — drop a pin at your guesthouse gate. For sunrise photos, walk to the west edge where the canals are widest.",
+      accent:"closest"}
+    ,{ slug:"hangzhou", name:"Hangzhou", tag:"Lake & tea",
+      img:"assets/hz_westlake.jpg",
+      brief:"West Lake at dusk, Longjing tea fields, and the calm poets wrote about for a thousand years.",
+      intro:"Hangzhou has been China's favorite retreat since the Song dynasty: West Lake ringed by temples and causeways, Longjing tea terraces in the hills, and a lakefront that rewards a slow bicycle more than a fast itinerary.",
+      best:"March–May (peach blossoms) and September–November. A rainy afternoon is a feature, not a bug — the lake is at its most atmospheric.",
+      sights:["West Lake promenade at sunset, from the Broken Bridge side","Longjing village tea fields at dawn (villagers may offer you a cup)","Lingyin Temple and its thousand-Buddha cliff","Boat across the lake to the islands at dusk","A bicycle loop of the 15km lake path"],
+      how:"High-speed rail: 45 minutes from Shanghai Hongqiao. The airport shuttle + metro reach West Lake in about an hour.",
+      tip:"The classic West Lake photo spot (Leifeng Pagoda viewpoint) is beautiful — but the real magic is the quiet north shore at 7am, when only the swans are out.",
+      accent:"closest"}
+  ];
+
+  /* ===== 数据：攻略 ===== */
+  var GUIDES = [
+    {
+      slug:"visas", title:"Visas & entry", ico:"doc",
+      lead:"China's entry rules have been changing fast. Here is how to get it right in 2026.",
+      paras:[
+        "For many nationalities, visa-free entry is now the default: most European, Australian, New Zealand, Japanese, and South Korean passports currently enjoy 15–30 day visa-free stays (as of early 2026). Always verify the current list with your nearest Chinese embassy or the official China Visa service site before booking.",
+        "If your passport needs a visa, apply at least 4–6 weeks ahead. The standard L (tourist) visa now allows multiple entries, and applications can be done online at many consulates. Keep a printed copy of your flight and hotel bookings for immigration.",
+        "Carry your passport with you, and register your accommodation — your hotel does this automatically. If you stay in a private apartment, the host must register you with the local police station within 24 hours.",
+        "The 24-hour and 144-hour transit visa-free rules still apply at major hubs: you can often stay 2–6 days in cities like Shanghai, Beijing, and Guangzhou without a visa, if you hold a confirmed onward ticket."
+      ],
+      tip:"Take a photo of your passport page and visa on your phone. It is accepted in most hotel check-ins and saves a fumble at immigration."
+    }
+    ,{ slug:"payments", title:"Mobile payments", ico:"card",
+      lead:"China is nearly cashless. Setting up Alipay or WeChat Pay takes 15 minutes — do it before you land.",
+      paras:[
+        "Alipay and WeChat Pay accept international Visa and Mastercard on foreign cards since 2023. Download both apps, choose 'International' mode, and link your card before departure — the process is smoother on home Wi-Fi.",
+        "Both apps now support English interfaces, and Alipay has a dedicated Traveler Pass. For taxis, hotels, street food, and train tickets, a QR scan settles everything in seconds.",
+        "Cash is still legal and accepted, but carry small denominations — many street vendors cannot make change for large notes, and some smaller shops are cash-free entirely.",
+        "Keep one card that does not charge foreign fees, and tell your bank you are traveling. Withdrawing 200–300 yuan in cash at an airport ATM is a sensible backup."
+      ],
+      tip:"Add a second card as backup in Alipay — if your primary card is blocked by your bank's fraud filter, the fix is a 2-minute switch, not a call home."
+    }
+    ,{ slug:"transport", title:"Getting around", ico:"train",
+      lead:"High-speed rail is the best travel bargain in the world. Here is how to ride it like a local.",
+      paras:[
+        "China's high-speed network (G and D trains) connects every major city: Beijing–Shanghai in 4.5 hours, Beijing–Xi'an in 4.5, Chengdu–Chongqing in 1. China Railway (12306.cn) sells tickets online with a passport; the official app has an English mode.",
+        "Book long-distance trains 3–7 days ahead during holidays. At the station, scan your passport at the gate — no paper ticket needed for domestic routes on the app-booking system.",
+        "Metro systems in 40+ cities are cheap (1.5–4 yuan), frequent, and English-labeled. Use the local map app (see guides) rather than a western one for transit directions.",
+        "For cities without rail links (many western destinations), domestic flights are affordable. Fly into Lijiang, Zhangjiajie, and Guilin directly — rail detours add a day."
+      ],
+      tip:"A 90-minute 'D' train costs about the same as an economy flight for 4-hour routes — and arrives downtown, not at a distant airport. Take the train whenever the rail time is under 5 hours."
+    }
+    ,{ slug:"language", title:"Language & translation", ico:"chat",
+      lead:"You can travel China with zero Chinese. These tools and phrases carry you through.",
+      paras:[
+        "Translation apps are excellent now: both DeepL and the major AI translation apps handle Chinese well, and photo-translation (point at a menu or sign) is remarkably accurate. Download an offline pack before you land.",
+        "A dozen phrases make a real difference: ni hao (hello), xie xie (thank you), bu yao la de (not spicy), dui bu qi (sorry), and 'this one, please' — pointing works.",
+        "For addresses and taxi destinations, have the Chinese characters ready on your phone screen — drivers and maps both read Chinese far better than pinyin.",
+        "Most young urbanites speak some English, and hotel staff, metro staff, and airport counters are reliably bilingual. In smaller towns, the translation app is your companion."
+      ],
+      tip:"Screenshot the Chinese name of your hotel and key sights before each day. Showing a screen beats pronouncing pinyin nine times out of ten."
+    }
+    ,{ slug:"staying", title:"Where to stay", ico:"bed",
+      lead:"From international chains to courtyard guesthouses — how to choose, and how to book.",
+      paras:[
+        "Booking platforms: international sites (Booking, Agoda, Trip.com) show English reviews and handle most hotels. Domestic guesthouses and 'minsu' often appear only on Chinese platforms — use Trip.com's local inventory for the widest range.",
+        "For old-town destinations like Lijiang and Yangshuo, a courtyard guesthouse (minsu) beats a chain hotel: quieter rooms, local hosts, and breakfast with a view. Check recent reviews for noise and dampness — old buildings vary.",
+        "Location beats star rating. In Beijing, stay near a metro line inside the 2nd ring; in Xi'an, inside the city wall; in Shanghai, near a metro station anywhere in the former French Concession or Bund area.",
+        "Hotels register your passport at check-in — this is automatic and required by law. Keep your booking confirmation in Chinese ready for taxi drivers."
+      ],
+      tip:"Book the first night of a trip in advance; for the rest, walk-in is often fine off-season and gets you better prices than same-day apps."
+    }
+    ,{ slug:"food", title:"Food & dining", ico:"eat",
+      lead:"Chinese food is regional, not national. Order like a local and eat better than any guidebook list.",
+      paras:[
+        "The regional map: Beijing (roast duck, lamb hotpot), Xi'an (noodles, roujiamo), Sichuan (hotpot, mapo tofu), Hunan (steaming spice), Cantonese (dim sum, slow soups), Shanghai (xiaolongbao). A 'national dish' does not exist — regional is the only way.",
+        "Ordering basics: point at the menu with photos, say 'zhe ge' (this one), and specify 'bu yao la' (not spicy) if needed. For hotpot, a split pot (half spicy, half clear) keeps everyone happy.",
+        "Street food is safe when it is cooked in front of you and busy. Follow the queues of locals — a long line at 7pm is the best quality signal in China.",
+        "Tea houses and night markets are dining experiences, not just stops. In Chengdu, the teahouse IS the main course."
+      ],
+      tip:"Chopstick rule: never stick chopsticks upright in a bowl of rice — it resembles funeral incense. Rest them on the chopstick rest instead."
+    }
+    ,{ slug:"safety", title:"Safety & etiquette", ico:"shield",
+      lead:"China is one of the safest large countries to travel. A little etiquette keeps every interaction warm.",
+      paras:[
+        "Street crime is rare. Petty theft exists in tourist crowds — keep your phone in a front pocket at busy sites, the same habit as anywhere.",
+        "Personal space and physical contact differ: strangers will not bump you on purpose, and loud disagreements in public are rare. Keep your own voice moderate in queues and on transport.",
+        "In temples and mosques, dress conservatively and remove hats where signs ask. Do not photograph people without a smile and a gesture first — most are happy to say yes.",
+        "Tipping is not expected anywhere, including restaurants and hotels. Offering a small gift (fruit, tea) to a homestay host is the generous equivalent."
+      ],
+      tip:"In an emergency, dial 110 (police), 120 (ambulance), or 119 (fire) — operators can usually connect to an English speaker. Your hotel front desk is the fastest interpreter."
+    }
+    ,{ slug:"internet", title:"Internet & maps", ico:"wifi",
+      lead:"The apps that make China easy — and what to know about connectivity before you go.",
+      paras:[
+        "For maps and transit, install a China-friendly app before arrival: the local map app (with English mode) is essential for metro routing and walking directions — western map apps are unreliable or incomplete in China.",
+        "Translation: DeepL and the major AI translation apps work well offline once language packs are downloaded. Photo-translate menus and signs by pointing your camera.",
+        "Connectivity: international roaming from your home carrier works in China and keeps your usual apps reachable — but can be pricey. Travel eSIMs sold before departure are the popular middle ground; hotel and café Wi-Fi is widespread but may be slow.",
+        "Local SIM cards (China Mobile, China Unicom) at airport counters are cheap and give fast data — bring your passport, and ask for a tourist data plan with a QR-setup."
+      ],
+      tip:"Whatever connectivity you choose, download offline maps of your first two cities and screenshots of your hotel address before you fly. It makes the first hour stress-free."
+    }
+  ];
+
+  /* ===== 数据：路线 ===== */
+  var ITINERARIES = [
+    {
+      id:"classic", days:"7 days", title:"The Classic Loop",
+      desc:"Beijing → Xi'an → Shanghai. Imperial walls, the Terracotta Army, and a modern skyline — the perfect first trip.",
+      stops:[
+        {d:"Day 1", t:"Arrive Beijing", s:"Land, take the airport express to your hotel near the metro, and ease in with a hutong stroll and Peking duck dinner.", stay:"Stay: inside the 2nd ring, near a metro line"},
+        {d:"Day 2", t:"Forbidden City & Temple of Heaven", s:"Morning at the Forbidden City (timed entry — book ahead), lunch in the hutongs, then Temple of Heaven at golden hour.", stay:"Stay: same hotel"},
+        {d:"Day 3", t:"The Great Wall at Mutianyu", s:"Full day at Mutianyu: cable car up, walk the wall, toboggan or cable car down. Back in the city by early evening.", stay:"Stay: same hotel"},
+        {d:"Day 4", t:"High-speed to Xi'an", s:"Morning G-train (4.5h). Afternoon: cycle the Ming City Wall at sunset, then dinner in the Muslim Quarter.", stay:"Stay: inside the city wall"},
+        {d:"Day 5", t:"Terracotta Army", s:"Go early (before 8:30), spend 3 hours with a guide, then Shaanxi History Museum in the afternoon.", stay:"Stay: same hotel"},
+        {d:"Day 6", t:"High-speed to Shanghai", s:"Morning G-train (6h). Afternoon: the Bund at golden hour and a walk through the former French Concession.", stay:"Stay: near a metro line"},
+        {d:"Day 7", t:"Shanghai finale", s:"Breakfast xiaolongbao, a relaxed morning (Yu Garden or a museum), then onward flight or train.", stay:"Stay: depart when ready"}
+      ]
+    }
+    ,{
+      id:"mountains", days:"12 days", title:"Mountains & Rivers",
+      desc:"Zhangjiajie → Guilin → Yangshuo. Sandstone pillars, karst peaks, and bamboo-raft mornings.",
+      stops:[
+        {d:"Day 1", t:"Arrive Zhangjiajie", s:"Fly or rail in, transfer to Wulingyuan park entrance, settle in for an early start.", stay:"Stay: near the Wulingyuan entrance"},
+        {d:"Day 2", t:"Yuanjiajie & Tianzi Mountain", s:"Enter at 7:00, cable car to Yuanjiajie ('Avatar' pillars) before crowds, then Tianzi Mountain in the afternoon.", stay:"Stay: park entrance"},
+        {d:"Day 3", t:"Golden Whip Stream & glass bridge", s:"Gentle 7km valley walk in the morning; Zhangjiajie Grand Canyon glass bridge in the afternoon.", stay:"Stay: park entrance"},
+        {d:"Day 4", t:"Tianmen Mountain", s:"City-side: Tianmen Mountain cable car, Heaven's Gate arch, and the cliff walkway. Rest early.", stay:"Stay: Zhangjiajie city"},
+        {d:"Day 5", t:"High-speed to Guilin", s:"Morning train to Guilin (or via Changsha). Evening: Two Rivers and Four Lakes night cruise.", stay:"Stay: Guilin city"},
+        {d:"Day 6", t:"Li River cruise to Yangshuo", s:"The classic 4-hour cruise down the Li River. Arrive Yangshuo, settle into a riverside guesthouse.", stay:"Stay: Yangshuo"},
+        {d:"Day 7", t:"Yulong River bamboo rafts", s:"Morning bamboo-raft drift on the Yulong River, afternoon cycling the countryside east of town.", stay:"Stay: Yangshuo"},
+        {d:"Day 8", t:"Xingping & the 20-yuan view", s:"Short bus to Xingping, hike or boat for the 20-yuan-bill view, slow afternoon back in Yangshuo.", stay:"Stay: Yangshuo"},
+        {d:"Day 9", t:"Slow day / optional Longji", s:"A rest day: teahouse, market, or the Longji Rice Terraces if you have the energy (2h each way).", stay:"Stay: Yangshuo"},
+        {d:"Day 10", t:"Return to Guilin", s:"Morning back to Guilin, afternoon at the Reed Flute Cave or Elephant Trunk Hill.", stay:"Stay: Guilin"},
+        {d:"Day 11", t:"Open day", s:"A spare day for weather, a slow breakfast, or a last hike — flexible by design.", stay:"Stay: Guilin"},
+        {d:"Day 12", t:"Depart", s:"Fly or rail onward from Guilin Liangjiang airport or Guilin North station.", stay:"Depart"}
+      ]
+    }
+    ,{
+      id:"slow", days:"15 days", title:"The Slow South",
+      desc:"Shanghai → Hangzhou → Chengdu → Lijiang. Gardens, pandas, tea, and old-town nights.",
+      stops:[
+        {d:"Day 1", t:"Arrive Shanghai", s:"Land, metro to the city, evening Bund walk.", stay:"Stay: French Concession or Bund area"},
+        {d:"Day 2", t:"Shanghai's layers", s:"Morning Yu Garden and old town, afternoon a museum, evening rooftop views.", stay:"Stay: same hotel"},
+        {d:"Day 3", t:"Slow Shanghai", s:"Former French Concession cafés, a park morning, and your best meal so far.", stay:"Stay: same hotel"},
+        {d:"Day 4", t:"Train to Hangzhou", s:"45-minute G-train. Afternoon at West Lake's north shore at golden hour.", stay:"Stay: near West Lake"},
+        {d:"Day 5", t:"West Lake & Longjing tea", s:"Sunrise at the lake, morning in Longjing tea village, afternoon Lingyin Temple.", stay:"Stay: same hotel"},
+        {d:"Day 6", t:"Train to Chengdu", s:"Long G-train (7h) — bring snacks and a window seat. Evening hotpot to arrive with style.", stay:"Stay: near a metro line"},
+        {d:"Day 7", t:"Pandas at 8:00", s:"Chengdu Research Base at opening time, then an afternoon teahouse in People's Park.", stay:"Stay: same hotel"},
+        {d:"Day 8", t:"Chengdu's food & calm", s:"Wenshu Monastery, Sichuan opera face-changing, and a second hotpot with the locals.", stay:"Stay: same hotel"},
+        {d:"Day 9", t:"Fly to Lijiang", s:"Short flight to Lijiang. Evening: the old town's lanterns and a canal-side dinner.", stay:"Stay: old town guesthouse"},
+        {d:"Day 10", t:"Old town at dawn", s:"The canals before 9am, then Baisha village and Shuhe for a quieter afternoon.", stay:"Stay: same guesthouse"},
+        {d:"Day 11", t:"Jade Dragon Snow Mountain", s:"Full day on the mountain cable car and its high meadows — book the ticket a day ahead.", stay:"Stay: same guesthouse"},
+        {d:"Day 12", t:"Open day", s:"Rain plan: Naxi orchestra and museums. Sun plan: cycle the countryside west of town.", stay:"Stay: same guesthouse"},
+        {d:"Day 13", t:"One more Lijiang morning", s:"Slow breakfast, a last wander, afternoon flight or train onward.", stay:"Stay: depart when ready"},
+        {d:"Day 14", t:"Buffer day", s:"A full spare day for weather, shopping, or revisiting a favorite spot.", stay:"Flexible"},
+        {d:"Day 15", t:"Depart", s:"Fly home or onward — this route ends as slowly as it lived.", stay:"Depart"}
+      ]
+    }
+  ];
+
+  /* ===== DOM helpers ===== */
+  function $(s){ return document.querySelector(s); }
+  function showToast(msg){
+    var t=$("#toast"); t.textContent=msg; t.classList.add("show");
+    clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove("show")},2800);
+  }
+
+  /* ===== 视图切换 ===== */
+  var viewIds=["home","destinations","detail","guides","guide-detail","itineraries","food","food-detail","culture","culture-detail","martial","martial-detail","contact"];
+  function showView(name){
+    viewIds.forEach(function(v){
+      var el=document.getElementById("view-"+v);
+      if(el){ el.classList.toggle("active", v===name); }
+    });
+    document.querySelectorAll(".nav-link").forEach(function(n){
+      var v=n.getAttribute("data-view");
+      var active=v===name || (name==="food-detail"&&v==="food") || (name==="culture-detail"&&v==="culture") || (name==="martial-detail"&&v==="martial");
+      n.classList.toggle("active", active);
+    });
+    window.scrollTo({top:0,behavior:"auto"});
+    closeMenu();
+  }
+  document.addEventListener("click", function(e){
+    var t=e.target.closest("[data-view]");
+    if(t){ showView(t.getAttribute("data-view")); }
+  });
+
+  /* ===== 菜单 ===== */
+  var menuBtn=$("#menuBtn"), navLinks=$("#navLinks");
+  function closeMenu(){ navLinks.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false"); }
+  menuBtn.addEventListener("click", function(){
+    var open=navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+  });
+
+  /* ===== 目的地卡片绑定（静态渲染，仅绑定事件） ===== */
+  document.querySelectorAll(".dest-card").forEach(function(card){
+    card.addEventListener("click", function(){ openDetail(card.getAttribute("data-slug")); });
+  });
+
+  /* ===== 目的地详情 ===== */
+  function openDetail(slug){
+    var d=DESTINATIONS.find(function(x){return x.slug===slug});
+    if(!d) return;
+    var sights=d.sights.map(function(s){return "<li>"+s+"</li>"}).join("");
+    $("#detailImg").src=d.img;
+    $("#detailImg").alt=d.name+" — "+d.tag;
+    $("#detailTitle").textContent=d.name;
+    $("#detailTag").textContent=d.tag;
+    $("#detailBest").textContent="Best: "+d.best.split(".")[0];
+    $("#detailBody").innerHTML=
+      '<h2><span class="no">01</span>The place</h2><p>'+d.intro+'</p>'+
+      '<h2><span class="no">02</span>When to go</h2><p>'+d.best+'</p>'+
+      '<h2><span class="no">03</span>Don\'t miss</h2><ul class="detail-list">'+sights+'</ul>'+
+      '<h2><span class="no">04</span>Getting there</h2><p>'+d.how+'</p>'+
+      '<div class="tip-box"><b>Insider tip:</b> '+d.tip+'</div>';
+    showView("detail");
+  }
+
+  /* ===== 攻略 ===== */
+  var guidesView=$("#view-guides"), guideDetailView=$("#view-guide-detail");
+  var ICONS={
+    doc:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>',
+    card:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg>',
+    train:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="3"/><path d="M4 11h16M8 21l2-4M16 21l-2-4M7 16v.01M17 16v.01"/></svg>',
+    chat:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg>',
+    bed:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9V5M2 15v3M2 12h20v6M2 12V9a3 3 0 0 1 3-3h7v6M22 12v3"/></svg>',
+    eat:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v5a3 3 0 0 1-6 0V3M5 8v13M16 3a4 4 0 0 1 4 4v4h-4M16 3v18M12 11v0"/></svg>',
+    shield:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V6z"/></svg>',
+    wifi:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5v.01"/></svg>'
+  };
+  function renderGuides(){
+    guidesView.innerHTML=
+      '<div class="section"><div class="wrap">'+
+        '<div class="section-head"><span class="section-kicker">Travel Guides</span><h2>The practical basics</h2><p>Eight guides that remove every friction point of traveling China — read these once and the rest is easy.</p></div>'+
+        '<div class="guide-grid">'+
+          GUIDES.map(function(g){ return '<div class="guide-card" data-g="'+g.slug+'"><div class="ico">'+ICONS[g.ico]+'</div><h3>'+g.title+'</h3><p>'+g.lead+'</p></div>'; }).join("")+
+        '</div>'+
+      '</div></div>';
+    guidesView.querySelectorAll(".guide-card").forEach(function(c){
+      c.addEventListener("click", function(){ openGuide(c.getAttribute("data-g")); });
+    });
+  }
+  function openGuide(slug){
+    var g=GUIDES.find(function(x){return x.slug===slug});
+    if(!g) return;
+    var paras=g.paras.map(function(p){return "<p>"+p+"</p>"}).join("");
+    guideDetailView.innerHTML=
+      '<div class="section" style="padding-bottom:0"><div class="wrap"><button type="button" class="back-link" data-view="guides">← All guides</button></div></div>'+
+      '<div class="guide-detail">'+
+        '<h2>'+g.title+'</h2><p class="lead">'+g.lead+'</p>'+paras+
+        '<div class="tip-box"><b>Traveler tip:</b> '+g.tip+'</div>'+
+        '<div class="section-head" style="margin-top:44px"><span class="section-kicker">Next</span><h2 style="font-size:30px">Still planning? Ask us.</h2><p>Send a question through the contact page — we reply within 48 hours.</p></div>'+
+        '<button class="btn btn-solid" data-view="contact">Ask a Question</button>'+
+      '</div>';
+    showView("guide-detail");
+  }
+  renderGuides();
+
+  /* ===== 路线 ===== */
+  var itinView=$("#view-itineraries");
+  function renderItineraries(activeId){
+    var active=ITINERARIES.find(function(x){return x.id===activeId}) || ITINERARIES[0];
+    var tabs=ITINERARIES.map(function(r){
+      return '<span class="itin-tab'+(r.id===active.id?" active":"")+'" data-i="'+r.id+'">'+r.days+' — '+r.title+'</span>';
+    }).join("");
+    var stops=active.stops.map(function(s){
+      return '<div class="itin-day"><b>'+s.d+'</b><h3>'+s.t+'</h3><p>'+s.s+'</p><div class="stay">'+s.stay+'</div></div>';
+    }).join("");
+    itinView.innerHTML=
+      '<div class="section"><div class="wrap">'+
+        '<div class="section-head"><span class="section-kicker">Itineraries</span><h2>'+active.days+' · '+active.title+'</h2><p>'+active.desc+'</p></div>'+
+        '<div class="itin-tabs">'+tabs+'</div>'+
+        '<div class="itin-timeline">'+stops+'</div>'+
+        '<div class="cta-band" style="border-radius:16px;margin-top:52px">'+
+          '<h2>Want this adjusted to your pace?</h2><p>Tell us your dates and travel style — we will reshape any route for free.</p>'+
+          '<button class="btn btn-light" data-view="contact">Request Changes</button>'+
+        '</div>'+
+      '</div></div>';
+    itinView.querySelectorAll(".itin-tab").forEach(function(t){
+      t.addEventListener("click", function(){ renderItineraries(t.getAttribute("data-i")); });
+    });
+  }
+  renderItineraries("classic");
+
+  /* ===== 数据：美食 ===== */
+  var FOODS = [
+    {slug:"peking-duck", name:"Peking Duck", region:"Beijing", ico:"duck",
+      brief:"A theatrical dish — crispy lacquered skin carved tableside and wrapped in thin pancakes.",
+      intro:"Peking duck is the closest Chinese food gets to theatre. The duck is roasted until its skin is glass-crisp, then carved at your table, skin and meat separated, served with paper-thin pancakes, sweet bean sauce, and slivers of scallion and cucumber.",
+      paras:[
+        "Order the classic three-part eating ritual: skin dipped in sugar (the purest crunch), then a pancake wrap with sauce and scallions, and finally the remaining meat in a stir-fry — most restaurants suggest the duck bone soup as the closing course.",
+        "The best-known houses (like Quanjude and Siji Minfu in Beijing) roast over fruitwood for that signature aroma. A whole duck feeds two to three people generously.",
+        "Book a table early — lunch queues start before noon at the famous houses. Ask for the 'skin first' presentation if you want the full ritual."
+      ],
+      tip:"Ask your waiter to show you the duck before it is carved — it is tradition, and the photo is half the meal."}
+    ,{slug:"paomo", name:"Xi'an Lamb Paomo", region:"Xi'an", ico:"noodle",
+      brief:"A lamb stew you build yourself — tear the flatbread, hand it back, and wait for the broth.",
+      intro:"Paomo is Xi'an's slow ritual: you tear a round flatbread into tiny crumbs with your fingers (the smaller, the better), hand the bowl back, and the kitchen fills it with simmering lamb broth, vermicelli, and tender mutton.",
+      paras:[
+        "Tearing the bread is part of the experience — locals take it seriously. The finer you tear, the more flavor the bread absorbs; a relaxed tear-and-chat session is the correct pace.",
+        "The best bowls come from the old Muslim Quarter stalls, where the broth has been simmering all morning. Order 'yao tang' (more broth) or 'gan pao' (drier) to tune the consistency.",
+        "Eat it with a side of pickled garlic and chilli oil — the tang cuts the richness of the lamb."
+      ],
+      tip:"Do not rush the bread-tearing. A hurried bowl is a lesser bowl — this is a dish built on patience."}
+    ,{slug:"hotpot", name:"Sichuan Hotpot", region:"Chengdu / Chongqing", ico:"hotpot",
+      brief:"A bubbling cauldron at the center of the table — the communal heart of Sichuan dining.",
+      intro:"Hotpot is less a dish than a social event: a pot of bubbling broth — half spicy, half clear for the cautious — surrounded by raw ingredients you cook yourself at the table.",
+      paras:[
+        "The signature is the ma-la (numbing-spicy) broth built on Sichuan peppercorn and dried chillies. First-timers should start with a split pot: spicy on one side, tomato or mushroom on the other.",
+        "The classic dipping sauce is a small bowl of sesame oil with minced garlic — it cools the spice and lifts every ingredient. Soy, vinegar, and cilantro are optional additions.",
+        "Typical ingredients: sliced beef, tripe, lotus root, potato, enoki mushrooms, and the Sichuan specialty of fresh duck blood. Cook beef in seconds, vegetables in minutes."
+      ],
+      tip:"Never drink cold water to fight the spice — sip the house tea or beer instead. And let the oil sauce do its job; it is the secret weapon."}
+    ,{slug:"dim-sum", name:"Cantonese Dim Sum", region:"Guangzhou / Hong Kong", ico:"steamer",
+      brief:"A thousand small dishes, pushed past your table on trolleys — breakfast as a long, lazy affair.",
+      intro:"Dim sum is Cantonese morning culture: small plates of dumplings, buns, and pastries, ordered pot of tea at a time, from morning until early afternoon.",
+      paras:[
+        "Start with the classics: har gow (crystal shrimp dumplings), siu mai (pork and shrimp), char siu bao (barbecue pork buns), and cheung fun (silky rice rolls).",
+        "Traditional halls push trolleys of bamboo steamers past your table — point at what catches your eye. Modern houses use ticketed menus; both are authentic, just different generations.",
+        "Pair everything with a pot of pu-erh or oolong. The tea is not a drink; it is the rhythm of the meal."
+      ],
+      tip:"Go in a group of four to six if you can — the joy of dim sum is ordering ten dishes and sharing everything."}
+    ,{slug:"xiaolongbao", name:"Shanghai Xiaolongbao", region:"Shanghai", ico:"xlb",
+      brief:"A soup-filled parcel no bigger than a coin purse — bite carefully, it bites back.",
+      intro:"Xiaolongbao is Shanghai in one mouthful: a thin pleated wrapper holding seasoned pork and a spoonful of hot broth, sealed inside by frozen gelatin that melts on steaming.",
+      paras:[
+        "The correct first bite is a small puncture in the top to release the steam, then a sip of the broth before the rest. Biting straight in is a guaranteed tongue burn.",
+        "Classic partners: black vinegar with slivered ginger on the side — dip the whole dumpling, not just the top.",
+        "The best shops steam to order; a queue of locals outside is the quality signal. Din Tai Fung made the style world-famous, but Shanghai's old teahouse-style shops do it with more soul."
+      ],
+      tip:"Count the pleats — traditional xiaolongbao have 18. It is not essential, just a piece of the romance."}
+    ,{slug:"lanzhou-noodles", name:"Lanzhou Beef Noodles", region:"Lanzhou / nationwide", ico:"noodle",
+      brief:"One clear broth, one clean bowl — the noodle breakfast that conquered a nation.",
+      intro:"Lanzhou lamian is China's most democratic noodle: a clear beef broth, hand-pulled noodles, a few slices of beef, radish, coriander, and chilli oil — nothing more, and nothing less.",
+      paras:[
+        "The noodles are pulled fresh to order: thin, medium, or wide — 'xi, er, da' — plus specialty shapes. Watch the puller through the open kitchen; it is a performance in itself.",
+        "The broth's clarity is the point. A good bowl tastes of beef and bones, not seasoning. Add chilli oil to your taste — 'bu yao la' if you want it mild.",
+        "It is a breakfast and lunch staple across China; the best shops in Lanzhou itself have queues that start at 6am."
+      ],
+      tip:"Choose 'jiu ye' (wide, flat ribbons) for texture or 'xi xi de' (hair-thin) for broth absorption — and eat fast; noodles wait for no one."}
+    ,{slug:"mapo-tofu", name:"Mapo Tofu", region:"Chengdu", ico:"spicy",
+      brief:"Silky tofu in a red oil that numbs and burns at once — Sichuan's most famous export.",
+      intro:"Mapo tofu is the perfect Sichuan dish: tender tofu cubes braised in a fiery sauce of doubanjiang (fermented broad-bean paste), minced beef, and a generous dose of ground Sichuan peppercorn.",
+      paras:[
+        "The name honors a pockmarked grandmother ('mapo') who invented it in Chengdu in the 19th century. The authentic version is far more complex than the takeout standard — the doubanjiang is stir-fried until the oil runs red.",
+        "Eat it over plain rice; the sauce is meant to be soaked up. The numbing (ma) comes last, after the spice — that is the Sichuan signature.",
+        "Order 'la du shao yi dian' if you want less heat, but understand you are missing the point — the balance of numbing and spicy is the dish."
+      ],
+      tip:"The tell of a great mapo tofu: the oil is red and glossy, and the pepper's numbness lingers a few seconds after each spoonful."}
+    ,{slug:"roujiamo", name:"Roujiamo", region:"Xi'an", ico:"wrap",
+      brief:"China's original hamburger — slow-braised pork stuffed into a crisp flatbread.",
+      intro:"Roujiamo is Xi'an's answer to the sandwich: braised pork shoulder and offal, chopped and stuffed into a warm, crispy flatbread (baiji mo) baked in a clay oven.",
+      paras:[
+        "The best versions braise the meat for hours in a spiced broth. Ask for 'fei shou' (fatty-lean mix) — the fat is what makes it unforgettable.",
+        "It pairs with a bowl of liangpi (cold noodles) or a glass of sour plum juice in the Muslim Quarter.",
+        "The bread should be crisp outside and tender inside; a sad, chewy bun is the sign of a shortcut shop."
+      ],
+      tip:"Eat it within five minutes of it being made — the contrast of hot crisp bread and warm braised meat is the whole point."}
+    ,{slug:"guilin-rice-noodles", name:"Guilin Rice Noodles", region:"Guilin", ico:"noodle",
+      brief:"The breakfast that runs Guilin — tender rice noodles in a secret-recipe sauce.",
+      intro:"Guilin mifen is the city's morning fuel: soft rice noodles tossed in a savory sauce with pickled bamboo shoots, peanuts, and your choice of pork or beef, served dry or in broth.",
+      paras:[
+        "The soul is the lu shui — a fermented sauce that every shop guards like a family secret. Two shops two streets apart taste completely different.",
+        "Order it 'ban' (mixed dry) with a bowl of clear broth on the side, and add pickled long beans, chilli, and fresh coriander to your liking.",
+        "A local breakfast costs the price of a coffee — one of China's best value meals, and it fuels a day of karst hiking."
+      ],
+      tip:"Stand at the counter with the locals instead of taking a table — the fastest way to learn which toppings the regulars actually use."}
+    ,{slug:"crossing-bridge-noodles", name:"Yunnan Cross-Bridge Noodles", region:"Kunming", ico:"bowl",
+      brief:"A bowl of boiling broth and a ritual of raw ingredients that cook at your table.",
+      intro:"Guoqiao mifen (crossing-the-bridge noodles) is Yunnan's most theatrical breakfast: a vast bowl of bubbling broth, plus small plates of raw sliced chicken, fish, vegetables, and rice noodles that you slide in yourself, watching them cook.",
+      paras:[
+        "The name comes from a scholar who crossed a bridge daily to study on an island; his wife kept his food warm by floating a layer of oil on the broth — the 'bridge' is between the bank and the island.",
+        "The order matters: meat and eggs first (they need the hottest oil), then vegetables, then noodles, then a patient wait.",
+        "The broth stays hot because of the oil seal — do not drink it straight from the bowl at first; blow and test with a spoon."
+      ],
+      tip:"Add ingredients one course at a time, not all at once — the ritual is half the flavor, and the oil layer keeps the broth lethal for minutes."}
+    ,{slug:"jianbing", name:"Jianbing", region:"Tianjin / nationwide", ico:"wrap",
+      brief:"The 5-minute street breakfast — a crisp crepe folded around egg, scallion, and a crunchy cracker.",
+      intro:"Jianbing is China's ultimate street breakfast: a thin mung-bean crepe cooked on a round griddle, an egg cracked over it, brushed with hoisin-style sauce and chilli, scattered with scallion and coriander, and folded around a crispy fried cracker (bao cui).",
+      paras:[
+        "The order goes: 'jianbing, one egg, no coriander, extra chilli' — every vendor has their own sauce recipe, and locals have opinions.",
+        "It is a north-China breakfast that has spread nationwide; the best are made at busy intersections where the griddle never cools.",
+        "Eat it immediately, walking — the contrast of hot crepe, cold morning, and crunchy cracker is the experience."
+      ],
+      tip:"Ask for 'jia bao cui' (double cracker) if you want it extra crunchy — and hold the plastic bag open so it steams less; crispness is everything."}
+    ,{slug:"mooncake", name:"Mooncake", region:"Mid-Autumn, nationwide", ico:"moon",
+      brief:"The pastry of the Mid-Autumn Festival — dense, sweet, and loaded with meaning.",
+      intro:"Mooncakes appear once a year, for the Mid-Autumn Festival: small dense pastries with a rich filling — lotus seed paste, red bean, or the classic salted egg yolk — traditionally given as gifts to family, friends, and colleagues.",
+      paras:[
+        "The traditional Cantonese mooncake has a golden crust and a single salted egg yolk at its heart, symbolizing the full moon. Northerners eat a flakier version; modern shops make everything from ice-cream to matcha.",
+        "Eat them in thin slices — they are intensely sweet and rich. Pair with a pot of jasmine or pu-erh tea, which is the proper companion.",
+        "If you travel during the festival, accepting a mooncake (even a small one) is a warm social ritual — and gift etiquette runs: never refuse twice."
+      ],
+      tip:"One mooncake serves four people at tea. And the salted-egg version is the benchmark — judge a box by its yolk."}
+  ];
+
+  var FOOD_ICONS={
+    duck:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 3a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h9a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H6M3 17h14l3-4M3 21h14"/>',
+    noodle:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 11a7 7 0 0 0 14 0M8 4l-1 3M12 4l-1 3M16 4l-1 3M5 17h14M5 21h14"/>',
+    hotpot:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM7 13V7a5 5 0 0 1 10 0v6M12 3v2M9 4.5l1 2M15 4.5l-1 2"/>',
+    steamer:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zM7 12V8a5 5 0 0 1 10 0v4M12 8v2M4 6h16"/>',
+    xlb:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 1 9 9 9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9zM8 12h8M12 8v8"/>',
+    spicy:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.5 1.5 2 3 1.5 4.5M9 6c1.5 1.5 2 3 1.5 4.5M15 6c1.5 1.5 2 3 1.5 4.5M10 11c0 5-2 8-2 10a4 4 0 0 0 8 0c0-2-2-5-2-10"/>',
+    wrap:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M3 12h18M6 6l12 12M18 6L6 18"/>',
+    bowl:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a9 9 0 0 1-18 0zM7 11V7a5 5 0 0 1 10 0v4M12 4v1"/>',
+    moon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8a4 4 0 0 0 0 8M10 12h.01"/>'
+  };
+
+  /* ===== 视图：美食 ===== */
+  var foodView=$("#view-food"), foodDetailView=$("#view-food-detail");
+  function renderFood(){
+    foodView.innerHTML=
+      '<div class="section"><div class="wrap">'+
+        '<div class="section-head"><span class="section-kicker">Chinese Food</span><h2>Twelve dishes worth the trip</h2><p>Food is the fastest way into any culture. These are the regional icons — where they come from, how to eat them, and what not to do.</p></div>'+
+        '<div class="guide-grid">'+
+          FOODS.map(function(f){ return '<div class="guide-card" data-f="'+f.slug+'"><div class="ico">'+FOOD_ICONS[f.ico]+'</div><span class="card-tag">'+f.region+'</span><h3>'+f.name+'</h3><p>'+f.brief+'</p></div>'; }).join("")+
+        '</div>'+
+      '</div></div>';
+    foodView.querySelectorAll(".guide-card").forEach(function(c){
+      c.addEventListener("click", function(){ openFood(c.getAttribute("data-f")); });
+    });
+  }
+  function openFood(slug){
+    var f=FOODS.find(function(x){return x.slug===slug});
+    if(!f) return;
+    var paras=f.paras.map(function(p){return "<p>"+p+"</p>"}).join("");
+    foodDetailView.innerHTML=
+      '<div class="section" style="padding-bottom:0"><div class="wrap"><button type="button" class="back-link" data-view="food">← All dishes</button></div></div>'+
+      '<div class="guide-detail">'+
+        '<span class="card-tag">'+f.region+'</span>'+
+        '<h2>'+f.name+'</h2><p class="lead">'+f.brief+'</p>'+paras+
+        '<div class="tip-box"><b>Traveler tip:</b> '+f.tip+'</div>'+
+        '<div class="section-head" style="margin-top:44px"><span class="section-kicker">Keep exploring</span><h2 style="font-size:30px">Hungry for the next bite?</h2><p>Browse all regional dishes, or ask us for a food-focused itinerary.</p></div>'+
+        '<button type="button" class="btn btn-solid" data-view="food">More Dishes</button>'+
+      '</div>';
+    showView("food-detail");
+  }
+  renderFood();
+
+  /* ===== 联系表单 ===== */
+  var form=$("#contactForm");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name=$("#cName").value.trim(), email=$("#cEmail").value.trim(), msg=$("#cMsg").value.trim();
+    if(!name || !email || !msg){ showToast("Please fill in all fields."); return; }
+    showToast("Message noted — hello@overcomeself.com will reply within 48h.");
+    form.reset();
+  });
+
+  /* ===== 数据：风俗 ===== */
+  var CUSTOMS = [
+    {slug:"spring-festival", name:"Chinese New Year", region:"Nationwide · Jan/Feb", ico:"lantern",
+      brief:"The biggest annual homecoming on earth — reunion dinners, red packets, and a week of firecrackers.",
+      intro:"Chinese New Year (Spring Festival) is a 15-day festival that empties the cities: millions travel home, families cook the year's best meal, elders give red packets (hongbao), and the country pauses to reset.",
+      paras:[
+        "The reunion dinner on New Year's Eve is the sacred centerpiece — dumplings in the north, fish (never finished, for surplus) in the south, always more dishes than anyone can eat.",
+        "Red packets of money are given to children and unmarried adults; the amount should be even and auspicious — avoid 4, which sounds like 'death'.",
+        "Expect firecrackers at midnight and morning greetings of 'gong xi fa cai' (wish you wealth). Shops close for the first week — plan food and cash ahead if you travel then.",
+        "If invited to a family dinner, arrive early, compliment the food, and take a small gift — fruit or tea, never clocks or umbrellas."
+      ],
+      tip:"Travelling during this period is magical but crowded — trains book out weeks ahead, so fix your dates early. Many museums are closed days 1–3."}
+    ,{slug:"mid-autumn", name:"Mid-Autumn Festival", region:"Nationwide · Sep/Oct", ico:"moon",
+      brief:"The full-moon festival — lanterns, mooncakes, and the night the whole country looks up.",
+      intro:"Mid-Autumn falls on the full moon of the eighth lunar month: families gather to eat mooncakes, drink tea, and watch the moon — the roundest, brightest symbol of reunion in Chinese culture.",
+      paras:[
+        "Mooncakes are exchanged obsessively in the weeks before — companies gift boxes, families swap flavors. The classic is lotus paste with a salted egg yolk.",
+        "Cities hold lantern displays; the best are in old towns and park lakes, where lanterns float on the water. Children carry small paper lanterns on the night itself.",
+        "If you are invited to share the festival, bring tea or fruit — and expect to be offered mooncake you cannot refuse (eat a slice, even if sweet)."
+      ],
+      tip:"The moon is best watched at 9–10pm from a lakeside or rooftop — and yes, the 'rabbit in the moon' legend will be enthusiastically explained to you."}
+    ,{slug:"dragon-boat", name:"Dragon Boat Festival", region:"Nationwide · May/Jun", ico:"dragon",
+      brief:"Racing boats, sticky-rice pyramids, and a 2,000-year-old story of loyalty.",
+      intro:"Dragon Boat Festival honors Qu Yuan, a poet of 2,300 years ago who drowned himself in protest — the legend says villagers raced out in boats and threw rice to feed the fish. Today: zongzi and dragon-boat races.",
+      paras:[
+        "Zongzi are pyramid-shaped parcels of glutinous rice — wrapped in bamboo or reed leaves, stuffed with pork and yolk (south) or red dates (north), boiled for hours.",
+        "Dragon-boat races happen on rivers across southern China; the most spectacular are in Guangdong and Hunan. Arrive early for the best bank spot.",
+        "Homes hang calamus and mugwort at the door for protection — you will see the bundles even in modern cities."
+      ],
+      tip:"Zongzi are eaten warm with sugar or soy — and the leaf is a wrapper, not food. One parcel is a meal; two is a feast."}
+    ,{slug:"tea-culture", name:"The Tea Culture", region:"Tea country nationwide", ico:"tea",
+      brief:"Not a drink — a language. Learn the ritual and the whole country opens up.",
+      intro:"Tea is China's most universal social currency. From a street vendor's glass of jasmine to a formal gongfu ceremony, tea is how people slow down, do business, and show respect.",
+      paras:[
+        "The map: green teas from Zhejiang and Jiangxi (Longjing is the crown jewel), oolong from Fujian (Tieguanyin), black tea from Fujian and Yunnan, and pu-erh, the fermented aged tea from Yunnan that collectors treat like wine.",
+        "The gongfu ritual: rinse the cups, warm the pot, pour the tea in small bitter-sweet sips. The host pours; the guest taps two fingers on the table to say thanks.",
+        "In a teahouse, your pot is refilled with hot water until the leaves give out — a session can last hours for the price of one pot.",
+        "A gift of good tea is the most respected gesture in Chinese social life. If you visit a tea village, the tasting is free and the pressure is gentle."
+      ],
+      tip:"Accept the first pour even if you dislike tea — refusing is read as refusing the relationship. One sip, then honesty is welcome."}
+    ,{slug:"temple-etiquette", name:"Temple Etiquette", region:"Buddhist & Taoist sites", ico:"temple",
+      brief:"How to visit temples with respect — and what the incense and bows actually mean.",
+      intro:"China's temples — Buddhist, Taoist, and local shrines — are living places of worship, not just photo stops. A few simple habits make your visit welcomed rather than endured.",
+      paras:[
+        "Dress modestly: covered shoulders and knees. Remove hats inside halls. If incense is offered, light it from the flame side, hold it at forehead height, and bow three times before placing it in the burner.",
+        "Do not point at statues with one finger — gesture with an open palm. Do not take photos of statues in some halls; look for the no-camera sign or ask.",
+        "Walk clockwise around pagodas and stupas. In the main hall, step over (never on) the high threshold — it separates the sacred from the everyday.",
+        "A donation is optional; a few yuan in the box with a silent wish is the traditional way."
+      ],
+      tip:"Early morning (7–9am) is when temples feel alive — locals doing morning prayers, monks sweeping, incense fresh. Midday is for tourists."}
+    ,{slug:"dining-etiquette", name:"Dining Etiquette", region:"Every table, everywhere", ico:"table",
+      brief:"The rules that make or break a Chinese dinner — chopsticks, toasts, and the shared table.",
+      intro:"Chinese meals are shared affairs with rules that feel natural within minutes. Learn the core ones and you will eat like an insider everywhere.",
+      paras:[
+        "Never stick chopsticks upright in a bowl of rice — it resembles funeral incense. Rest them on the chopstick rest or the side of the bowl.",
+        "When food is served, let the host or elders start first. Use the serving chopsticks for shared dishes, not your own.",
+        "Toasting: hold your cup slightly lower than the host's when clinking. 'Ganbei' means bottoms up; for everything else, sip. Never pour your own drink — pour for others and let them pour for you.",
+        "The bill: everyone reaches for it, the host insists. If a colleague insists on paying, accept with thanks — offering again later is the polite return."
+      ],
+      tip:"Saying 'xie xie' and leaving a little food on your plate signals you are full and satisfied — a clean plate can read as 'still hungry'."}
+    ,{slug:"red-packets", name:"Red Packets & Gifts", region:"Nationwide", ico:"gift",
+      brief:"The color red speaks louder than words — a quick guide to giving and receiving well.",
+      intro:"Hongbao (red packets) and gift-giving carry precise social meaning in China. Getting the basics right earns instant goodwill; getting them wrong can quietly offend.",
+      paras:[
+        "Red packets: given at New Year, weddings, and births — cash in a red envelope, never white (funerals) or black. Amounts should be even, avoid 4, and favor 8 or 6.",
+        "Gifts: bring something from your home country — tea, coffee, or local sweets are safe. Avoid clocks ('song zhong' sounds like attending a funeral) and pears ('li' sounds like separation).",
+        "Present and receive gifts with two hands. Do not open a gift immediately unless encouraged — opening later is polite in many circles.",
+        "When you receive a red packet or gift, modest refusal first ('bu yong, bu yong') is traditional — the giver insists, and you accept with thanks."
+      ],
+      tip:"If you give money, use crisp new bills — old or folded notes are considered careless. And a small red packet to a guide or host's child is always warmly received."}
+    ,{slug:"morning-parks", name:"The Morning Park", region:"Every Chinese city", ico:"park",
+      brief:"Tai chi, badminton, opera, and chess — the daily life that no guidebook schedules.",
+      intro:"Between 6 and 9am, Chinese parks become the country's real living room: retired couples dancing, tai chi masters moving through forms, badminton players improvising nets, opera singers practicing against the willows.",
+      paras:[
+        "The morning park is free, open, and welcoming — join a tai chi group with a smile and you will likely be taught a few moves. Language is not required; mimicry is accepted.",
+        "Dancers dominate after 7am — 'square dancing' with music boxes. No one minds if you watch or even join the back row.",
+        "Tea houses inside parks fill by 8am with chess and card players — a 'kan' (looker) crowd gathers around every good game.",
+        "This is the least touristy China you will see in a week. Go with no plan, sit on a bench, and watch an hour pass."
+      ],
+      tip:"Bring nothing but a water bottle. The best morning-park cities for visitors: Chengdu (People's Park), Hangzhou (by West Lake), Beijing (Temple of Heaven grounds)."}
+  ];
+
+  var CULTURE_ICONS={
+    lantern:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-2 3-4 4.5-4 8a4 4 0 0 0 8 0c0-3.5-2-5-4-8zM8 11h8M10 21l-1 0M14 21l1 0"/>',
+    moon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8a4 4 0 0 0 0 8M10 12h.01"/>',
+    dragon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16c4-1 6-2 8-5 1-1.5 1.5-3 1-5l2-2 4 3 3-1-1 2c2 1 3 3 2 5l-2 1M3 16l1 3M11 16l2 2M6 19l-1 2M9 19l0 2"/>',
+    tea:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM4 10V8h13v2M17 12h2a2 2 0 0 1 0 4h-2M8 6l-1 2M12 6l-1 2M16 6l-1 2"/>',
+    temple:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12M12 4v17M9 21v-4a3 3 0 0 1 6 0v4M4 9h16"/>',
+    table:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v4H3zM6 11v8M18 11v8M3 19h18M7 15h.01M11 15h.01M15 15h.01"/>',
+    gift:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-2-2.5-5-1.5-5 0 0 1.5 2 2 5 2 3 0 5-.5 5-2 0-1.5-3-2.5-5 0zM4 9h16v4H4zM5 13h14v8H5zM12 9v12"/>',
+    park:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6 6 .5-4.5 4L18 19l-6-3-6 3 1.5-5.5L3 9.5 9 9z"/>'
+  };
+
+  /* ===== 视图：风俗 ===== */
+  var cultureView=$("#view-culture"), cultureDetailView=$("#view-culture-detail");
+  function renderCulture(){
+    cultureView.innerHTML=
+      '<div class="section"><div class="wrap">'+
+        '<div class="section-head"><span class="section-kicker">Culture &amp; Customs</span><h2>What the locals know</h2><p>Festivals, tea, temples, and the small unwritten rules of daily life — understand these and China stops being exotic and starts being home.</p></div>'+
+        '<div class="guide-grid">'+
+          CUSTOMS.map(function(c){ return '<div class="guide-card" data-c="'+c.slug+'"><div class="ico">'+CULTURE_ICONS[c.ico]+'</div><span class="card-tag">'+c.region+'</span><h3>'+c.name+'</h3><p>'+c.brief+'</p></div>'; }).join("")+
+        '</div>'+
+      '</div></div>';
+    cultureView.querySelectorAll(".guide-card").forEach(function(c){
+      c.addEventListener("click", function(){ openCulture(c.getAttribute("data-c")); });
+    });
+  }
+  function openCulture(slug){
+    var c=CUSTOMS.find(function(x){return x.slug===slug});
+    if(!c) return;
+    var paras=c.paras.map(function(p){return "<p>"+p+"</p>"}).join("");
+    cultureDetailView.innerHTML=
+      '<div class="section" style="padding-bottom:0"><div class="wrap"><button type="button" class="back-link" data-view="culture">← All customs</button></div></div>'+
+      '<div class="guide-detail">'+
+        '<span class="card-tag">'+c.region+'</span>'+
+        '<h2>'+c.name+'</h2><p class="lead">'+c.brief+'</p>'+paras+
+        '<div class="tip-box"><b>Traveler tip:</b> '+c.tip+'</div>'+
+        '<div class="section-head" style="margin-top:44px"><span class="section-kicker">Keep exploring</span><h2 style="font-size:30px">Curious about the next custom?</h2><p>More traditions await — or ask us anything about living in China.</p></div>'+
+        '<button type="button" class="btn btn-solid" data-view="culture">More Customs</button>'+
+      '</div>';
+    showView("culture-detail");
+  }
+  renderCulture();
+
+  /* ===== 数据：武术 ===== */
+  var MARTIAL = [
+    {slug:"tai-chi", name:"Tai Chi", region:"Nationwide · parks & temples", ico:"taiji",
+      brief:"The martial art that looks like meditation — slow, flowing, and secretly lethal.",
+      intro:"Tai chi (taijiquan) is China's most practiced martial art: slow, continuous movements that train alignment, balance, and internal power. Millions practice it every morning in parks — and it is a real fighting system underneath the calm.",
+      paras:[
+        "The five major families — Chen, Yang, Wu, Wu (Hao), and Sun — share the same principles but different flavors: Chen has explosive fajin bursts, Yang is the slow grand form most people picture.",
+        "The martial core is the 'silk reeling' spiral and the push-hands (tuishou) partner drill — learning to yield, redirect, and issue force through structure, not muscle.",
+        "For visitors: join any morning park group and you will be welcomed; just mirror the leader. Parks like Beijing's Temple of Heaven and Chengdu's People's Park have strong daily groups.",
+        "A week of classes will change how you stand and breathe; a year changes how you move through the world."
+      ],
+      tip:"Wear flat, flexible shoes and arrive before 7am — the groups dissolve by 8, replaced by dancers and chess players."}
+    ,{slug:"shaolin", name:"Shaolin Kung Fu", region:"Dengfeng, Henan", ico:"fist",
+      brief:"The temple that birthed a thousand styles — monks, legends, and the cradle of northern kung fu.",
+      intro:"Shaolin Temple in Henan is the most famous martial-arts site on earth: a Buddhist monastery that has trained warrior monks for 1,500 years, and the ancestral home of northern Shaolin kung fu.",
+      paras:[
+        "The Shaolin curriculum spans bare-hand forms, staff, and the 'eighteen weapons', plus the animal styles — tiger, crane, snake, leopard, and dragon — each teaching a different fighting logic.",
+        "The temple's martial lineage famously inspired Bruce Lee, Jet Li, and the modern wuxia imagination. The surrounding Dengfeng area hosts several martial schools where foreigners train year-round.",
+        "Visit early, watch a monk demonstration (several are held daily), and respect the rule: it is a working monastery, so dress modestly and skip flash photography in the halls.",
+        "If you want to actually train, dozens of schools in the region offer week-long 'kung fu experience' packages for all levels."
+      ],
+      tip:"The monk demonstrations feel like theatre — they are also the real thing. Arrive 30 minutes early for a front spot; the courtyard fills fast."}
+    ,{slug:"wing-chun", name:"Wing Chun", region:"Guangdong / Hong Kong", ico:"hand",
+      brief:"Close-range, efficient, street-born — the style Ip Man made famous.",
+      intro:"Wing Chun is a southern style built for close combat: no wasted motion, an economy of movement, and a centerline theory that says attack and defense happen along the shortest line — straight at your opponent's chest.",
+      paras:[
+        "Made legendary by Ip Man and his student Bruce Lee, Wing Chun is compact enough to fight in a phone booth: simultaneous defense and strike, sticky hands (chi sao) to feel an opponent's intent through touch.",
+        "The signature stance is the YGKYM ('goat-clamping') horse — low, narrow, and rooted. Beginners drill the three basic hand forms and the wooden dummy.",
+        "In Guangdong and Hong Kong, many private masters still teach the traditional curriculum; classes are small, serious, and often conducted in a mix of Cantonese and English.",
+        "It is the least 'showy' martial art — which is exactly the point: efficiency over spectacle."
+      ],
+      tip:"A chi sao session with a good master is humbling and addictive — expect to be 'stuck' and gently thrown for the first hour. That is the lesson."}
+    ,{slug:"qigong", name:"Qigong", region:"Nationwide", ico:"breath",
+      brief:"Breathing as medicine — the ancient practice behind every Chinese martial art.",
+      intro:"Qigong ('qi work') is the cultivation practice at the root of all Chinese martial arts: coordinated breath, posture, and intention to build internal energy, health, and calm. No sweating required — and that is the point.",
+      paras:[
+        "The two great branches: stillness qigong (standing like a tree — zhan zhuang) and moving qigong (flowing forms like the famous Eight Pieces of Brocade, baduanjin).",
+        "Modern Chinese hospitals and clinics use qigong-style therapy alongside medicine; millions practice daily, and it is a mainstay of park mornings and rehabilitation programs.",
+        "For visitors, the most accessible entry is baduanjin — eight gentle movements, ten minutes, doable in a hotel room. Classes are common in parks, teahouses, and wellness centers.",
+        "The science-friendly framing: qigong trains breath control, posture, and focus — the 'qi' is felt as warmth and flow. Whether you call it energy or biomechanics, the practice works."
+      ],
+      tip:"Learn the Eight Pieces of Brocade before you arrive — five minutes of YouTube daily for a week, and you can join any morning park group as an insider."}
+    ,{slug:"xingyi", name:"Xingyi Quan", region:"Shanxi / Hebei / nationwide", ico:"punch",
+      brief:"The straight-line art of soldiers — five elements, one punch philosophy, terrifying economy.",
+      intro:"Xingyi ('form-intent') is the most direct of the internal arts: no circles, no retreat — a straight-line style built on the 'five elements' (piercing, splitting, drilling, chopping, crossing) and twelve animal forms.",
+      paras:[
+        "Its origin is soldierly: legend traces it to Marshal Yue Fei, and the style's stance-to-stance logic mirrors spear work. Practitioners say xingyi is the shortest distance between two points — applied to combat.",
+        "The 'three-body posture' (santishi) is its foundation: hours of standing to build the frame that makes every punch arrive with the whole body behind it.",
+        "Xingyi pairs naturally with bagua zhang in traditional practice — many masters of the two arts were the same people, taught together as complementary opposites.",
+        "It is less common than tai chi in parks, but a serious xingyi practitioner is unmistakable: explosive, linear, and eerily still between movements."
+      ],
+      tip:"Ask a practitioner to show you the 'split' element — one movement. It looks simple and lands like a freight train. Do not volunteer to receive it."}
+    ,{slug:"bagua", name:"Bagua Zhang", region:"Beijing / nationwide", ico:"bagua",
+      brief:"Walking circles, changing palms — the martial art that moves like weather.",
+      intro:"Bagua zhang ('eight-trigram palm') is the circular internal art: practitioners walk a circle, endlessly changing direction and palm techniques, turning the opponent's aggression into their own motion.",
+      paras:[
+        "Its philosophy mirrors the I Ching's eight trigrams — constant change. You never meet force with force; you walk around it, behind it, through it.",
+        "The signature skill is 'dragon body' — a low, coiled walk with the head high, like a snake wrapped around a tree. Footwork is the art; the palms are a bonus.",
+        "Historically associated with Beijing's bodyguard culture (the palace escort lore), it remains one of the most visually striking arts to watch in parks.",
+        "It complements xingyi in the classical pairing: one straight, one circular — together they are the complete internal curriculum."
+      ],
+      tip:"Park masters love showing off bagua's circling walk to curious foreigners — watch the feet, not the hands. The hands are the decoy."}
+    ,{slug:"jeet-kune-do", name:"Jeet Kune Do & Bruce Lee", region:"Hong Kong heritage · worldwide", ico:"bolt",
+      brief:"The philosophy that broke every rule — Bruce Lee's anti-style style.",
+      intro:"Jeet Kune Do is not a style but an idea, forged by Bruce Lee: absorb what is useful, reject what is useless, add what is uniquely your own. 'Be like water' — adapt, flow, and strike when the opening is there.",
+      paras:[
+        "Lee built JKD from Wing Chun, fencing, boxing, and Filipino martial arts, stripping away ceremony in favor of what works — intercepting the opponent's attack rather than blocking it.",
+        "In Hong Kong, his legacy lives at the Bruce Lee statue on the Avenue of Stars and in the old Kowloon sites of his story. His films — Enter the Dragon, Fist of Fury — remain the gateway drug for global kung fu obsession.",
+        "JKD is taught worldwide; in China, the legacy is more philosophical than institutional — the idea, not the curriculum.",
+        "For visitors, the takeaway is practical: watch his interviews, not just the fights. His philosophy of flow applies to travel, business, and everything else."
+      ],
+      tip:"The Bruce Lee statue at the Avenue of Stars is free, iconic, and best visited at sunset — and yes, everyone does the water-cup salute photo."}
+    ,{slug:"wudang", name:"Wudang & the Taoist Arts", region:"Wudang Mountains, Hubei", ico:"mountain",
+      brief:"Where kung fu meets Taoism — mist, mountains, and the art of yielding.",
+      intro:"The Wudang Mountains are the sacred home of Taoist martial arts: the birthplace of tai chi's internal lineage in legend, and a living center where Taoist monks still practice sword, tai chi, and qigong on forested peaks.",
+      paras:[
+        "The visual is unmatched: Taoist temples on cliff tops above cloud seas, practitioners practicing sword forms at dawn. The Golden Summit at 1,612m is the pilgrimage's crown.",
+        "Wudang's arts are internal: taiji, xingyi, bagua, and the legendary Wudang sword — taught with a Taoist worldview of balance, breath, and non-contention.",
+        "Several academies in the mountains accept foreigners for multi-week training immersions — accommodation, meals, and daily classes in the clouds.",
+        "It is a place to feel the philosophy: every form is a meditation, every step a negotiation with gravity."
+      ],
+      tip:"Go in spring or autumn for clear skies; the cloud-sea days are gorgeous but the summit can be socked in. Trainers at the academies teach in English and love genuine beginners."}
+  ];
+
+  var MARTIAL_ICONS={
+    taiji:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 1 9 9 9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9z"/><path d="M12 3a6 6 0 0 0 0 9 6 6 0 0 1 0 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9z" transform="translate(0 0)"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>',
+    fist:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4c-1 2-2 3-4 3v5c0 3 2 6 6 7 4-1 6-4 6-8v-2h-3c-2 0-3-2-3-3zM12 4V2M8 7H5a3 3 0 0 0-3 3v3"/></svg>',
+    hand:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V5a1.5 1.5 0 0 1 3 0v5M10 10V4a1.5 1.5 0 0 1 3 0v6M13 10V5a1.5 1.5 0 0 1 3 0v6M16 11V7a1.5 1.5 0 0 1 3 0v6c0 4-2 7-6 8-3-.5-5-3-6-6l-1.5-3M7 11v3"/></svg>',
+    breath:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-4 3 8 2-4h5M4 16h3M17 8h3"/></svg>',
+    punch:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3-3 6-6 8-11 1-3 4-5 9-7-1 5-2 8-5 10-2 1-4 2-6 2zM3 21l4-3"/></svg>',
+    bagua:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v8M12 12l5-4M12 12l-5-4M12 12v8M12 12l5 4M12 12l-5 4"/></svg>',
+    bolt:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
+    mountain:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 10 6l3 6 2-3 5 9zM10 6l-2-2M10 6l-1 3M8 15l2-3 3 2"/></svg>'
+  };
+
+  /* ===== 视图：武术 ===== */
+  var martialView=$("#view-martial"), martialDetailView=$("#view-martial-detail");
+  function renderMartial(){
+    martialView.innerHTML=
+      '<div class="section"><div class="wrap">'+
+        '<div class="section-head"><span class="section-kicker">Chinese Martial Arts</span><h2>The way of the fist — and the breath</h2><p>Tai chi, kung fu, qigong, and the great internal arts — where they come from, what they mean, and exactly where you can see or learn them.</p></div>'+
+        '<div class="guide-grid">'+
+          MARTIAL.map(function(m){ return '<div class="guide-card" data-m="'+m.slug+'"><div class="ico">'+MARTIAL_ICONS[m.ico]+'</div><span class="card-tag">'+m.region+'</span><h3>'+m.name+'</h3><p>'+m.brief+'</p></div>'; }).join("")+
+        '</div>'+
+      '</div></div>';
+    martialView.querySelectorAll(".guide-card").forEach(function(c){
+      c.addEventListener("click", function(){ openMartial(c.getAttribute("data-m")); });
+    });
+  }
+  function openMartial(slug){
+    var m=MARTIAL.find(function(x){return x.slug===slug});
+    if(!m) return;
+    var paras=m.paras.map(function(p){return "<p>"+p+"</p>"}).join("");
+    martialDetailView.innerHTML=
+      '<div class="section" style="padding-bottom:0"><div class="wrap"><button type="button" class="back-link" data-view="martial">← All arts</button></div></div>'+
+      '<div class="guide-detail">'+
+        '<span class="card-tag">'+m.region+'</span>'+
+        '<h2>'+m.name+'</h2><p class="lead">'+m.brief+'</p>'+paras+
+        '<div class="tip-box"><b>Traveler tip:</b> '+m.tip+'</div>'+
+        '<div class="section-head" style="margin-top:44px"><span class="section-kicker">Keep exploring</span><h2 style="font-size:30px">Walk the path further?</h2><p>More arts await — or ask us to pair a martial visit with your itinerary.</p></div>'+
+        '<button type="button" class="btn btn-solid" data-view="martial">More Arts</button>'+
+      '</div>';
+    showView("martial-detail");
+  }
+  renderMartial();
+
+  /* ===== 初始路由 ===== */
+  var initial=location.hash.replace("#","");
+  if(viewIds.indexOf(initial)>-1){ showView(initial); }
+})();
+</script>
+
+
+</body>
+</html>
