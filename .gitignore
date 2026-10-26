@@ -1,0 +1,16 @@
+# 敏感凭证 - 绝不提交
+.douyin_cookies.txt
+*.cookies
+*_cookies.txt
+
+# 部署临时目录
+_deploy_work/
+
+# 备份文件
+*.bak
+*.bak_*
+
+# 系统文件
+Thumbs.db
+.DS_Store
+desktop.ini

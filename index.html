@@ -146,6 +146,17 @@
   .route-more{font-size:14px;font-weight:600;color:var(--vermilion);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
   .route-more:hover{text-decoration:underline}
 
+  /* ===== 本周特写：一城一味（2026-10-25 美食+文化主题） ===== */
+  .food-spot{display:grid;grid-template-columns:1fr;gap:18px}
+  @media(min-width:768px){.food-spot{grid-template-columns:repeat(3,1fr)}}
+  .spot-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(35,32,28,.08)}
+  .spot-card:hover{box-shadow:var(--shadow)}
+  .spot-card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+  .spot-body{padding:18px 20px 20px}
+  .spot-body h3{font-size:21px;margin:6px 0 8px}
+  .spot-body p{font-size:14.5px;color:var(--ink-soft);margin-bottom:12px}
+  .spot-body .tip-box{margin:0;font-size:13.5px;padding:12px 14px}
+
   /* ===== CTA 带 ===== */
   .cta-band{background:var(--vermilion);color:#fff;text-align:center;padding:64px 20px}
   .cta-band h2{font-size:clamp(28px,4.2vw,42px);margin-bottom:12px}
@@ -391,6 +402,86 @@
             <p>Shanghai → Hangzhou → Chengdu → Lijiang. Gardens, pandas, tea, and old-town nights.</p>
             <button type="button" class="route-more" data-view="itineraries">View itinerary →</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 本周特写：一城一味（2026-10-25 美食主题，静态章节） ===== -->
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">This Week · Chinese Food</span>
+          <h2>One bowl, one city</h2>
+          <p>China's cuisines change every 200 kilometers. Three dishes that define three places — where they come from, and exactly how to order them.</p>
+        </div>
+        <div class="food-spot">
+          <article class="spot-card">
+            <img src="assets/xa_terracotta.jpg" alt="Roujiamo, Xi'an's original hamburger">
+            <div class="spot-body">
+              <span class="card-tag">Xi'an · Street food</span>
+              <h3>Roujiamo — China's original hamburger</h3>
+              <p>Slow-braised pork, chopped and stuffed into a crisp flatbread baked in a clay oven. The Muslim Quarter makes the best in the city.</p>
+              <div class="tip-box"><b>Traveler tip:</b> Ask for "fei shou" (fatty-lean mix) and eat it within five minutes — the hot-crisp bread is the whole point.</div>
+            </div>
+          </article>
+          <article class="spot-card">
+            <img src="assets/gl_liriver.jpg" alt="Rice noodles by the Li River in Guilin">
+            <div class="spot-body">
+              <span class="card-tag">Guilin · Breakfast</span>
+              <h3>Guilin Rice Noodles — the city's morning fuel</h3>
+              <p>Tender rice noodles tossed in a fermented sauce every shop guards like a family secret. Costs about the price of a coffee.</p>
+              <div class="tip-box"><b>Traveler tip:</b> Order it "ban" (mixed dry) with a bowl of clear broth on the side, and stand with the locals to learn which toppings the regulars use.</div>
+            </div>
+          </article>
+          <article class="spot-card">
+            <img src="assets/cd_panda.jpg" alt="Mapo tofu and hotpot in Chengdu">
+            <div class="spot-body">
+              <span class="card-tag">Chengdu · Sichuan flavor</span>
+              <h3>Mapo Tofu — the heat you taste twice</h3>
+              <p>Silken tofu in a red, glossy oil — numbing peppercorns first, then slow heat. Chengdu's most famous balance of spice and depth.</p>
+              <div class="tip-box"><b>Traveler tip:</b> Say "la du shao yi dian" for less heat, but know you are missing the point — the numbness and spice are meant to balance.</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 本周特写：一城一味（2026-10-25 文化主题，静态章节） ===== -->
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-kicker">This Week · Chinese Culture</span>
+          <h2>One custom, one city</h2>
+          <p>Three living traditions you can step into the moment you arrive — tea as a greeting, a teahouse as a living room, and an old town that still hums in its own language.</p>
+        </div>
+        <div class="food-spot">
+          <article class="spot-card">
+            <img src="assets/hz_westlake.jpg" alt="Longjing tea country around West Lake, Hangzhou">
+            <div class="spot-body">
+              <span class="card-tag">Hangzhou · Tea ritual</span>
+              <h3>Longjing Tea — the art of the first pour</h3>
+              <p>West Lake's hills grow China's most famous green tea. Watch the "three pours" — a short rinse, a tilted pour, a gentle refill. Never fill a cup to the rim; that is a goodbye.</p>
+              <div class="tip-box"><b>Traveler tip:</b> Drink it plain — no sugar, no milk. The second infusion is the best, so do not rush the first.</div>
+            </div>
+          </article>
+          <article class="spot-card">
+            <img src="assets/cd_panda.jpg" alt="Teahouse life in Chengdu">
+            <div class="spot-body">
+              <span class="card-tag">Chengdu · Teahouse life</span>
+              <h3>The Teahouse — China's living room</h3>
+              <p>In Chengdu, People's Park's teahouses are open-air living rooms: lid-bowl tea, mahjong tiles, and ear-cleaners with silver tools. Sit down, order one pot, and stay all afternoon.</p>
+              <div class="tip-box"><b>Traveler tip:</b> Nod at the table you are joining — sharing a table with strangers is normal. The tea refills from a thermos, free.</div>
+            </div>
+          </article>
+          <article class="spot-card">
+            <img src="assets/lj_lijiang.jpg" alt="Naxi old town of Lijiang at dusk">
+            <div class="spot-body">
+              <span class="card-tag">Lijiang · Naxi culture</span>
+              <h3>The Naxi Old Town — music in the canals</h3>
+              <p>Lijiang is the home of the Naxi people, whose Dongba script is the world's last living pictographic writing system. Canals, stone lanes, and evening Naxi orchestra in the square.</p>
+              <div class="tip-box"><b>Traveler tip:</b> The free Naxi Ancient Music performance at Sifang Square starts at dusk — arrive ten minutes early for a seat by the canal.</div>
+            </div>
+          </article>
         </div>
       </div>
     </div>
