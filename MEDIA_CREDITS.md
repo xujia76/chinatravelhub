@@ -17,6 +17,7 @@
 | 1 | 抖音 Douyin | @朗读者 | 爆火出圈，回顾外国游客被中国游圈粉瞬间 | https://www.douyin.com/video/7452343532234313010 | 2024-12-25 | guides.html → Real voices 卡片，仅外链 | 否 | 卡片内 "Shot by @朗读者 via Douyin" + 区块底部 Media credit | 2026-10-25 |
 | 2 | 抖音 Douyin | @盛夏夜乐园 | tiktok上"China travel"好火，来华旅游的老外们都成了代言人 | https://www.douyin.com/video/7379458272748719369 | 2024-06-12 | guides.html → Real voices 卡片，仅外链 | 否 | 卡片内 "Shot by @盛夏夜乐园 via Douyin" + 区块底部 Media credit | 2026-10-25 |
 | 3 | 哔哩哔哩 Bilibili | 气派太极-健身 | 24式太极拳 \| 慢速、带呼吸导引、跟练版来了！ | https://www.bilibili.com/video/BV1hV411F7Z2 | 2023-10 | guides.html → Watch 区块，**本地托管 720p 英译版**（见下节） | 否 | 视频下方 "Original: @气派太极-健身 via Bilibili · BV1hV411F7Z2 · English subtitles by Wan" | 2026-10-25 |
+| 4 | 抖音 Douyin | @笑面虎 | 影之刃零斩马刀慢动作教学！跟着魂大人学武术！动捕的动作看着就是顺眼！ | https://www.iesdouyin.com/share/video/7706215105985269042 | 2026-11-10 11:30 | blade.html → Source 区块，**仅外链**；十式只做文字拆解与命名，不使用其画面 | 否 | Source 卡片内 "Video by @笑面虎 on Douyin, published 10 November 2026 · referenced for study and description only" | 2026-11-10 |
 
 ## 英译二次加工登记（本地托管类）
 
